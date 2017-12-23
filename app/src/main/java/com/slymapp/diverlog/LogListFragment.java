@@ -3,6 +3,8 @@ package com.slymapp.diverlog;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,10 +30,13 @@ public class LogListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_log_list, container, false);
-        adapter = new LogListAdapter();
+        adapter = new LogListAdapter(getFragmentManager());
         listView = view.findViewById(R.id.log_list_view);
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
         listView.setAdapter(adapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(listView.getContext(),
+                new LinearLayoutManager(getActivity()).getOrientation());
+        listView.addItemDecoration(dividerItemDecoration);
         return view;
     }
 

@@ -1,5 +1,11 @@
 package com.slymapp.diverlog;
 
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,24 +20,49 @@ import java.util.List;
  */
 public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private List<String> list = new ArrayList<>();
+    private class Book{
+        String id;
+        String place;
+        String date;
 
-    LogListAdapter(){
-        for(int i = 0;  i< 30; i++){
-            list.add("テキスト" + i);
+        Book(String id, String place, String date){
+            this.id = id;
+            this.place = place;
+            this.date = date;
         }
+    }
+    private List<Book> list = new ArrayList<>();
+    private FragmentManager fragmentManager;
+
+    LogListAdapter(FragmentManager fragmentManager){
+        for(int i = 0;  i< 30; i++){
+            list.add(new Book("id" + i, "place" + i, "date" + i));
+        }
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_log_list_item, parent, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment fragment = new MainActivityFragment();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.addToBackStack(null); // 戻るボタンでreplace前に戻る
+                fragmentTransaction.commit();
+            }
+        });
         return new ItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-        itemViewHolder.textView.setText(list.get(position));
+        itemViewHolder.book_id.setText(list.get(position).id);
+        itemViewHolder.place.setText(list.get(position).place);
+        itemViewHolder.date.setText(list.get(position).date);
     }
 
     @Override
@@ -41,11 +72,15 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private class ItemViewHolder extends RecyclerView.ViewHolder{
 
-        TextView textView;
+        TextView book_id;
+        TextView place;
+        TextView date;
 
         ItemViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.view_log_list_item_text);
+            book_id = itemView.findViewById(R.id.book_id);
+            place = itemView.findViewById(R.id.place);
+            date = itemView.findViewById(R.id.date);
         }
     }
 }
