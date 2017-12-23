@@ -1,0 +1,80 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light"
+        android:clickable="true"
+        tools:context="com.slymapp.diverlog.LogAddFragment">
+
+        <TextView
+            android:id="@+id/log_add_diving_number_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ダイブNo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/log_add_diving_number_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="1"
+            app:layout_constraintBaseline_toBaselineOf="@id/log_add_diving_number_label"
+            app:layout_constraintStart_toEndOf="@id/log_add_diving_number_label"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/log_add_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日付"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/log_add_diving_number_label" />
+
+        <TextView
+            android:id="@+id/log_add_date_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="2017/12/23"
+            app:layout_constraintBaseline_toBaselineOf="@id/log_add_date_label"
+            app:layout_constraintStart_toEndOf="@id/log_add_date_label"
+            tools:text="2017/12/23" />
+
+        <TextView
+            android:id="@+id/log_add_place_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="場所"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/log_add_date_label"
+            tools:text="場所" />
+
+        <EditText
+            android:id="@+id/log_add_place_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="どこかの海"
+            android:inputType="text"
+            app:layout_constraintStart_toEndOf="@id/log_add_place_label"
+            app:layout_constraintBaseline_toBaselineOf="@id/log_add_place_label"
+            tools:text="どこかの海" />
+
+        <Button
+            android:id="@+id/log_add_add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登録！"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="登録！" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
