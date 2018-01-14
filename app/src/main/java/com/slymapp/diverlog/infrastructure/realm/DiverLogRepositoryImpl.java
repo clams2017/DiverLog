@@ -8,8 +8,12 @@ import com.slymapp.diverlog.infrastructure.realm.entity.DiverLogEntity;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * {@link com.slymapp.diverlog.domain.DiverLogRepository}のRealm実装
@@ -33,6 +37,22 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
             return null;
         }
         return diverLogEntity.toDiverLog();
+    }
+
+    @Override
+    public List<DiverLog> fetchAll() {
+        try (Realm realm = Realm.getDefaultInstance()) {
+            RealmResults<DiverLogEntity> results = realm.where(DiverLogEntity.class).findAll();
+            return Observable.fromIterable(results)
+                    .map(new Function<DiverLogEntity, DiverLog>() {
+                        @Override
+                        public DiverLog apply(DiverLogEntity diverLogEntity) throws Exception {
+                            return diverLogEntity.toDiverLog();
+                        }
+                    })
+                    .toList()
+                    .blockingGet();
+        }
     }
 
     private void initWithMock() {

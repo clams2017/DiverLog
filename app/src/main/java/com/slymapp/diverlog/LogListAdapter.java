@@ -4,13 +4,14 @@ package com.slymapp.diverlog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.slymapp.diverlog.domain.DiverLog;
+import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,24 +21,11 @@ import java.util.List;
  */
 public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private class Book{
-        String id;
-        String place;
-        String date;
-
-        Book(String id, String place, String date){
-            this.id = id;
-            this.place = place;
-            this.date = date;
-        }
-    }
-    private List<Book> list = new ArrayList<>();
+    private List<DiverLog> list = new ArrayList<>();
     private FragmentManager fragmentManager;
 
     LogListAdapter(FragmentManager fragmentManager){
-        for(int i = 0;  i< 30; i++){
-            list.add(new Book("id" + i, "place" + i, "date" + i));
-        }
+        list = new DiverLogRepositoryImpl().fetchAll();
         this.fragmentManager = fragmentManager;
     }
 
@@ -60,9 +48,9 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-        itemViewHolder.book_id.setText(list.get(position).id);
-        itemViewHolder.place.setText(list.get(position).place);
-        itemViewHolder.date.setText(list.get(position).date);
+        itemViewHolder.book_id.setText(list.get(position).getDivingNumber() + "");
+        itemViewHolder.place.setText(list.get(position).getPlace());
+        itemViewHolder.date.setText(list.get(position).getDate().toString());
     }
 
     @Override

@@ -5,12 +5,14 @@ import com.slymapp.diverlog.domain.DiverLog;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * RealmObject for {@link com.slymapp.diverlog.domain.DiverLog}
  */
 public class DiverLogEntity extends RealmObject {
 
+    @PrimaryKey
     private int divingNumber;
     private Date date;
     private String weather;
