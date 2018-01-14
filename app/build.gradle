@@ -35,4 +35,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
+
+    testCompile "org.robolectric:robolectric:3.6.1"
 }
