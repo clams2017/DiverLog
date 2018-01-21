@@ -1,15 +1,35 @@
 package com.slymapp.diverlog.domain;
 
+import android.util.SparseArray;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * {@link DiverLogRepository}のモッククラス
  */
 public class DiverLogRepositoryMock implements DiverLogRepository {
+
+    private SparseArray<DiverLog> diverLogSparseArray;
+
+    public DiverLogRepositoryMock() {
+        diverLogSparseArray = createWithMock();
+    }
+
     @Override
     public DiverLog fetch(int divingNo) {
-        return createDiverLogMock();
+        return diverLogSparseArray.get(divingNo);
+    }
+
+    @Override
+    public List<DiverLog> fetchAll() {
+        List<DiverLog> list = new ArrayList<>(diverLogSparseArray.size());
+        for (int i = 0; i < diverLogSparseArray.size(); i++) {
+            list.add(diverLogSparseArray.valueAt(i));
+        }
+        return list;
     }
 
     private DiverLog createDiverLogMock() {
@@ -29,6 +49,17 @@ public class DiverLogRepositoryMock implements DiverLogRepository {
         diverLog.setAverageDepth(20);
         diverLog.setMaxDepth(40);
         diverLog.setTemperature(10);
-        return null;
+        return diverLog;
+    }
+
+    private SparseArray<DiverLog> createWithMock() {
+        SparseArray<DiverLog> sparseArray = new SparseArray<>();
+        for (int i = 0; i < 30; i++) {
+            DiverLog log = createDiverLogMock();
+            log.setDivingNumber(i + 1);
+            log.setDate(new GregorianCalendar(2017, Calendar.DECEMBER, i + 1, 0, 0, 0).getTime());
+            sparseArray.put(log.getDivingNumber(), log);
+        }
+        return sparseArray;
     }
 }

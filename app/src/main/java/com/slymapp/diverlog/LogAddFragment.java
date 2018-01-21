@@ -20,7 +20,6 @@ import org.threeten.bp.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
-
 /**
  * ログ新規作成画面
  */
