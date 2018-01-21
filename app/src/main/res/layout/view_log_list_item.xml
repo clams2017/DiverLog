@@ -5,11 +5,10 @@
     android:layout_height="wrap_content"
     android:minHeight="48dp"
     android:padding="10dp"
-    android:onClick="@id/blank"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/book_id"
+        android:id="@+id/diving_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -25,7 +24,7 @@
         android:layout_marginStart="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/book_id"
+        app:layout_constraintLeft_toRightOf="@id/diving_number"
         tools:text="テキスト" />
 
     <TextView

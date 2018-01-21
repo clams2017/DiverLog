@@ -2,6 +2,9 @@ package com.slymapp.diverlog.domain;
 
 import java.util.Date;
 
+/**
+ * ダイバーログ
+ */
 public class DiverLog {
 
     /**

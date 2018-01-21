@@ -3,7 +3,6 @@ package com.slymapp.diverlog;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +18,13 @@ import java.util.List;
 /**
  * ログリストのアダプタークラス
  */
-public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<DiverLog> list = new ArrayList<>();
     private FragmentManager fragmentManager;
 
-    LogListAdapter(FragmentManager fragmentManager){
-        list = new DiverLogRepositoryImpl().fetchAll();
+    LogListAdapter(FragmentManager fragmentManager) {
+        list = new DiverLogRepositoryImpl().fetchAll(); // TODO 非同期で取得するよう変更する
         this.fragmentManager = fragmentManager;
     }
 
@@ -35,11 +34,11 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment fragment = new MainActivityFragment();
-                fragmentTransaction.replace(R.id.fragment, fragment);
-                fragmentTransaction.addToBackStack(null); // 戻るボタンでreplace前に戻る
-                fragmentTransaction.commit();
+                Fragment fragment = new DummyFragment(); // dummy fragment
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment, fragment)
+                        .addToBackStack(null) // 戻るボタンでreplace前に戻る
+                        .commit();
             }
         });
         return new ItemViewHolder(view);
@@ -48,9 +47,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-        itemViewHolder.book_id.setText(list.get(position).getDivingNumber() + "");
-        itemViewHolder.place.setText(list.get(position).getPlace());
-        itemViewHolder.date.setText(list.get(position).getDate().toString());
+        itemViewHolder.bind(list.get(position));
     }
 
     @Override
@@ -58,17 +55,24 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return list.size();
     }
 
-    private class ItemViewHolder extends RecyclerView.ViewHolder{
+    private class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        TextView book_id;
-        TextView place;
-        TextView date;
+        private TextView divingNumber;
+        private TextView place;
+        private TextView date;
 
         ItemViewHolder(View itemView) {
             super(itemView);
-            book_id = itemView.findViewById(R.id.book_id);
+            divingNumber = itemView.findViewById(R.id.diving_number);
             place = itemView.findViewById(R.id.place);
             date = itemView.findViewById(R.id.date);
         }
+
+        void bind(DiverLog diverLog) {
+            divingNumber.setText(String.valueOf(diverLog.getDivingNumber()));
+            place.setText(diverLog.getPlace());
+            date.setText(diverLog.getDate().toString());
+        }
+
     }
 }

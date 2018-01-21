@@ -1,18 +1,15 @@
 package com.slymapp.diverlog;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Hello Worldを表示する、画面遷移の実装のダミー画面
  */
-public class MainActivityFragment extends Fragment {
-
-    public MainActivityFragment() {
-    }
+public class DummyFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

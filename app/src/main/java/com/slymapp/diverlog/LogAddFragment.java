@@ -25,10 +25,11 @@ import java.util.Date;
  */
 public class LogAddFragment extends Fragment {
 
-    public LogAddFragment() {
-        // Required empty public constructor
-    }
-
+    /**
+     * ログ新規作成Fragmentを作成する。
+     *
+     * @return {@link LogAddFragment}
+     */
     public static LogAddFragment newInstance() {
         LogAddFragment fragment = new LogAddFragment();
         Bundle args = new Bundle();
@@ -40,6 +41,8 @@ public class LogAddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_log_add, container, false);
+
+        // DataBindingはViewHolderとしてのみ利用する
         final FragmentLogAddBinding binding = DataBindingUtil.bind(view);
         binding.logAddDateValue.setText(toDateString(new Date()));
         binding.logAddDateValue.setOnClickListener(new View.OnClickListener() {
