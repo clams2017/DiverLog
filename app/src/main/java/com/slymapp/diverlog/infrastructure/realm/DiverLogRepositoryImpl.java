@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.slymapp.diverlog.domain.DiverLog;
 import com.slymapp.diverlog.domain.DiverLogRepository;
+import com.slymapp.diverlog.infrastructure.realm.converter.DiverLogConverter;
 import com.slymapp.diverlog.infrastructure.realm.entity.DiverLogEntity;
 
 import java.util.Calendar;
@@ -27,16 +28,16 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
 
     @Override
     public DiverLog fetch(int divingNo) {
-        DiverLogEntity diverLogEntity;
+        DiverLogEntity entity;
         try (Realm realm = Realm.getDefaultInstance()) {
-            diverLogEntity = realm.where(DiverLogEntity.class)
+            entity = realm.where(DiverLogEntity.class)
                     .equalTo("divingNumber", divingNo)
                     .findFirst();
         }
-        if (diverLogEntity == null) {
+        if (entity == null) {
             return null;
         }
-        return diverLogEntity.toDiverLog();
+        return DiverLogConverter.createDiverLog(entity);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
                     .map(new Function<DiverLogEntity, DiverLog>() {
                         @Override
                         public DiverLog apply(DiverLogEntity diverLogEntity) throws Exception {
-                            return diverLogEntity.toDiverLog();
+                            return DiverLogConverter.createDiverLog(diverLogEntity);
                         }
                     })
                     .toList()
@@ -90,7 +91,7 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
         diverLog.setAverageDepth(20);
         diverLog.setMaxDepth(40);
         diverLog.setTemperature(10);
-        return new DiverLogEntity(diverLog);
+        return DiverLogConverter.createEntity(diverLog);
     }
 
 

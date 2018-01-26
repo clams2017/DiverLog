@@ -1,7 +1,5 @@
 package com.slymapp.diverlog.infrastructure.realm.entity;
 
-import com.slymapp.diverlog.domain.DiverLog;
-
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -31,24 +29,6 @@ public class DiverLogEntity extends RealmObject {
 
     public DiverLogEntity() {
 
-    }
-
-    public DiverLogEntity(DiverLog log) {
-        setDivingNumber(log.getDivingNumber());
-        setDate(log.getDate());
-        setWeather(log.getWeather());
-        setPlace(log.getPlace());
-        setEntryMethod(log.getEntryMethod());
-        setTransparent(log.getTransparent());
-        setStartTime(log.getStartTime());
-        setEndTime(log.getEndTime());
-        setStartPressure(log.getStartPressure());
-        setEndPressure(log.getEndPressure());
-        setSuits(log.getSuits());
-        setWeight(log.getWeight());
-        setAverageDepth(log.getAverageDepth());
-        setMaxDepth(log.getMaxDepth());
-        setTemperature(log.getTemperature());
     }
 
     public int getDivingNumber() {
@@ -169,25 +149,5 @@ public class DiverLogEntity extends RealmObject {
 
     public void setTemperature(float temperature) {
         this.temperature = temperature;
-    }
-
-    public DiverLog toDiverLog() {
-        DiverLog log = new DiverLog();
-        log.setDivingNumber(getDivingNumber());
-        log.setDate(getDate());
-        log.setWeather(getWeather());
-        log.setPlace(getPlace());
-        log.setEntryMethod(getEntryMethod());
-        log.setTransparent(getTransparent());
-        log.setStartTime(getStartTime());
-        log.setEndTime(getEndTime());
-        log.setStartPressure(getStartPressure());
-        log.setEndPressure(getEndPressure());
-        log.setSuits(getSuits());
-        log.setWeight(getWeight());
-        log.setAverageDepth(getAverageDepth());
-        log.setMaxDepth(getMaxDepth());
-        log.setTemperature(getTemperature());
-        return log;
     }
 }

@@ -1,6 +1,7 @@
 package com.slymapp.diverlog.infrastructure.realm.entity;
 
 import com.slymapp.diverlog.domain.DiverLog;
+import com.slymapp.diverlog.infrastructure.realm.converter.DiverLogConverter;
 
 import org.junit.Test;
 
@@ -34,7 +35,7 @@ public class DiverLogEntityTest {
         diverLog.setMaxDepth(40);
         diverLog.setTemperature(10);
 
-        DiverLogEntity actual = new DiverLogEntity(diverLog);
+        DiverLogEntity actual = DiverLogConverter.createEntity(diverLog);
 
         assertThat(actual.getDivingNumber(), is(diverLog.getDivingNumber()));
         assertThat(actual.getDate(), is(diverLog.getDate()));
@@ -72,7 +73,7 @@ public class DiverLogEntityTest {
         entity.setMaxDepth(40);
         entity.setTemperature(10);
 
-        DiverLog actual = entity.toDiverLog();
+        DiverLog actual = DiverLogConverter.createDiverLog(entity);
 
         assertThat(actual.getDivingNumber(), is(entity.getDivingNumber()));
         assertThat(actual.getDate(), is(entity.getDate()));
