@@ -39,22 +39,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_log_list_item, parent, false);
-        final ItemViewHolder viewHolder = new ItemViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int divingNo = Integer.parseInt((String) viewHolder.divingNumber.getText());
-                Fragment fragment = new LogDetailFragment();
-                Bundle args = new Bundle();
-                args.putInt("divingNumber", divingNo);
-                fragment.setArguments(args);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment, fragment)
-                        .addToBackStack(null) // 戻るボタンでreplace前に戻る
-                        .commit();
-            }
-        });
-        return viewHolder;
+        return new ItemViewHolder(view);
     }
 
     @Override
@@ -75,6 +60,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         private TextView date;
         private ImageView image;
         private Context context;
+        private View itemView;
 
         ItemViewHolder(View itemView) {
             super(itemView);
@@ -83,15 +69,29 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             date = itemView.findViewById(R.id.date);
             image = itemView.findViewById(R.id.image);
             context = itemView.getContext();
+            this.itemView = itemView;
         }
 
-        void bind(DiverLog diverLog) {
-            divingNumber.setText(String.valueOf(diverLog.getDivingNumber()));
+        void bind(final DiverLog diverLog) {
+            divingNumber.setText("ID: " + String.valueOf(diverLog.getDivingNumber()));
             place.setText(diverLog.getPlace());
-//            date.setText(diverLog.getDate().toString());
             date.setText(DateUtils.toDateString(diverLog.getDate()));
+            // とりあえず適当な画像を表示する
             Picasso.with(context).load("file://"+Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DCIM+"/m_9.jpg").fit().into(image);
-            Log.d("log_directory", Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DCIM+"/m_9.jpg");
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Fragment fragment = new LogDetailFragment();
+                    Bundle args = new Bundle();
+                    args.putInt("divingNumber", diverLog.getDivingNumber());
+                    fragment.setArguments(args);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragment, fragment)
+                            .addToBackStack(null) // 戻るボタンでreplace前に戻る
+                            .commit();
+                }
+            });
         }
     }
 }

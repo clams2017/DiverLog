@@ -18,6 +18,13 @@ public class LogListFragment extends Fragment {
 
     private LogListAdapter adapter;
 
+    public static LogListFragment newInstance() {
+        Bundle args = new Bundle();
+        LogListFragment fragment = new LogListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
