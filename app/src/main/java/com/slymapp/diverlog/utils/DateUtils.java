@@ -1,13 +1,13 @@
 package com.slymapp.diverlog.utils;
 
 
+import org.threeten.bp.DateTimeUtils;
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * 日付整形用クラス
@@ -15,20 +15,78 @@ import java.util.Locale;
  */
 
 public class DateUtils {
-    public static String toDateString(int year, int month, int day) {
-        // TODO 日付の暫定対応を修正する
-        LocalDateTime dateTime = LocalDateTime.of(year, month, day, 0, 0, 0);
-        return dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-    }
 
+    /**
+     * {@link Date}を日付形式に変換する
+     *
+     * @param date {@link Date}
+     * @return 日付形式 (yyyy/MM/dd)
+     */
     public static String toDateString(Date date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        return toDateString(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+        return DateUtils.format(date, "yyyy/MM/dd");
     }
 
+    /**
+     * {@link Date} を時刻形式に変換する
+     * @param date {@link}
+     * @return 時刻形式 (HH:mm)
+     */
     public static String toTimeString(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.JAPAN);
-        return sdf.format(date);
+        return DateUtils.format(date, "HH:mm");
+    }
+
+    /**
+     * 日付から{@link Date}を生成する
+     *
+     * @param year  年
+     * @param month 月
+     * @param day   日
+     * @return {@link Date} 時間は00:00:00で返却される
+     */
+    public static Date createFromDate(int year, int month, int day) {
+        return of(year, month, day, 0, 0, 0);
+    }
+
+    /**
+     * 時間から{@link Date}を生成する
+     *
+     * @param hour   時
+     * @param minute 分
+     * @param second 秒
+     * @return {@link Date} 日付は1970/01/01で返却される
+     */
+    public static Date createFromTime(int hour, int minute, int second) {
+        return of(1970, 1, 1, hour, minute, second);
+    }
+
+    // 以下は必要があればpublicに変更して使用する
+
+    /**
+     * 日時から{@link Date}を生成する
+     *
+     * @param year   年
+     * @param month  月
+     * @param day    日
+     * @param hour   時
+     * @param minute 分
+     * @param second 秒
+     * @return {@link Date}
+     */
+    private static Date of(int year, int month, int day, int hour, int minute, int second) {
+        LocalDateTime ldt = LocalDateTime.of(year, month, day, hour, minute, second);
+        return DateTimeUtils.toDate(ldt.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * 日時を指定した形式に変換する
+     *
+     * @param date    日時
+     * @param pattern 変換形式
+     * @return 指定形式で変換した文字列
+     */
+    private static String format(Date date, String pattern) {
+        ZonedDateTime dateTime = DateTimeUtils.toInstant(date).atZone(ZoneId.systemDefault());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return dateTime.format(formatter);
     }
 }
