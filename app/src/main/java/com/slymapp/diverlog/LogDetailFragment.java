@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.slymapp.diverlog.domain.DiverLog;
 import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
+import com.slymapp.diverlog.utils.DateUtils;
 
 
 /**
@@ -23,9 +24,7 @@ public class LogDetailFragment extends Fragment {
     private int divingNo;
 
     public static LogDetailFragment newInstance() {
-        LogDetailFragment fragment = new LogDetailFragment();
-
-        return fragment;
+        return new LogDetailFragment();
     }
 
     @Override
@@ -63,13 +62,13 @@ public class LogDetailFragment extends Fragment {
         TextView temperature   = view.findViewById(R.id.temperature);
 
         divingNumber.setText(String.valueOf(diverLog.getDivingNumber()));
-        date.setText(diverLog.getDate().toString());
+        date.setText(DateUtils.toDateString(diverLog.getDate()));
         weather.setText(diverLog.getWeather());
         place.setText(diverLog.getPlace());
         entryMethod.setText(diverLog.getEntryMethod());
         transparent.setText(String.valueOf(diverLog.getTransparent()));
-        startTime.setText(diverLog.getStartTime().toString());
-        endTime.setText(diverLog.getEndTime().toString());
+        startTime.setText(DateUtils.toDateString(diverLog.getStartTime()));
+        endTime.setText(DateUtils.toDateString(diverLog.getEndTime()));
         startPressure.setText(String.valueOf(diverLog.getStartPressure()));
         endPressure.setText(String.valueOf(diverLog.getEndPressure()));
         suits.setText(diverLog.getSuits());
