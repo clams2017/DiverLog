@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity
-    implements LogDetailFragment.OnFragmentInteractionListener {
+        implements LogDetailFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +24,13 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment, LogAddFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
+                startActivity(LogAddActivity.createIntent(MainActivity.this));
             }
         });
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment, LogListFragment.newInstance())
+                .commit();
     }
 
     @Override
