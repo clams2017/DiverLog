@@ -1,11 +1,12 @@
 package com.slymapp.diverlog.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * ダイバーログ
  */
-public class DiverLog {
+public class DiverLog implements Serializable {
 
     /**
      * ダイビングNo

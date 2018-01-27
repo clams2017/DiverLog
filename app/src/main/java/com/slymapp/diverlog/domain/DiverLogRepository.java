@@ -22,6 +22,16 @@ public interface DiverLogRepository {
     List<DiverLog> fetchAll();
 
     /**
+     * ダイバーログを追加します。
+     * ダイビングナンバーが一意でない場合は追加に失敗します。
+     * 一意となるダイビングナンバーは{@link #publishDivingNumber()}を利用してください。
+     *
+     * @param log {@link DiverLog}
+     * @return true→追加成功, false→追加失敗
+     */
+    boolean create(DiverLog log);
+
+    /**
      * 一意となるダイビングナンバーを発行します。
      *
      * @return ダイビングナンバー

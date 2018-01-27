@@ -33,6 +33,15 @@ public class DiverLogRepositoryMock implements DiverLogRepository {
     }
 
     @Override
+    public boolean create(DiverLog log) {
+        if (diverLogSparseArray.get(log.getDivingNumber()) != null) {
+            return false;
+        }
+        diverLogSparseArray.put(log.getDivingNumber(), log);
+        return true;
+    }
+
+    @Override
     public int publishDivingNumber() {
         //TODO ログ削除があった場合の動作を確認する
         return diverLogSparseArray.size() + 1;
