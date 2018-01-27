@@ -7,6 +7,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@android:color/background_light"
+        android:clickable="true"
         tools:context="com.slymapp.diverlog.LogDetailFragment">
 
         <TextView
