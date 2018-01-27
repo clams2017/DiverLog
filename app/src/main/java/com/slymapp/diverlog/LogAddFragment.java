@@ -13,6 +13,8 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.slymapp.diverlog.databinding.FragmentLogAddBinding;
+import com.slymapp.diverlog.domain.DiverLog;
+import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
 
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
@@ -44,6 +46,8 @@ public class LogAddFragment extends Fragment {
 
         // DataBindingはViewHolderとしてのみ利用する
         final FragmentLogAddBinding binding = DataBindingUtil.bind(view);
+        int divingNumber = new DiverLogRepositoryImpl().publishDivingNumber();
+        binding.logAddDivingNumberValue.setText(String.valueOf(divingNumber));
         binding.logAddDateValue.setText(toDateString(new Date()));
         binding.logAddDateValue.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.N)
@@ -63,6 +67,12 @@ public class LogAddFragment extends Fragment {
         binding.logAddAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // TODO 入力された情報を用いるよう修正する
+                DiverLog log = new DiverLog();
+                int divingNumber = Integer.valueOf((String) binding.logAddDivingNumberValue.getText());
+                log.setDivingNumber(divingNumber);
+                log.setDate(new Date());
+                new DiverLogRepositoryImpl().create(log);
                 Toast.makeText(getContext(), "ログの登録完了!(メッセージのみ)", Toast.LENGTH_SHORT).show();
             }
         });
