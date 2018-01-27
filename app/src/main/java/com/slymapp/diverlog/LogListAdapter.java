@@ -1,6 +1,7 @@
 package com.slymapp.diverlog;
 
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,17 +32,22 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_log_list_item, parent, false);
+        final ItemViewHolder viewHolder = new ItemViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new DummyFragment(); // dummy fragment
+                int divingNo = Integer.parseInt((String) viewHolder.divingNumber.getText());
+                Fragment fragment = new LogDetailFragment();
+                Bundle args = new Bundle();
+                args.putInt("divingNumber", divingNo);
+                fragment.setArguments(args);
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment, fragment)
                         .addToBackStack(null) // 戻るボタンでreplace前に戻る
                         .commit();
             }
         });
-        return new ItemViewHolder(view);
+        return viewHolder;
     }
 
     @Override

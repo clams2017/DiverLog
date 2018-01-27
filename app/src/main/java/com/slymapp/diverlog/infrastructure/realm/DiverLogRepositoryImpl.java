@@ -28,16 +28,15 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
 
     @Override
     public DiverLog fetch(int divingNo) {
-        DiverLogEntity entity;
         try (Realm realm = Realm.getDefaultInstance()) {
-            entity = realm.where(DiverLogEntity.class)
+            DiverLogEntity entity = realm.where(DiverLogEntity.class)
                     .equalTo("divingNumber", divingNo)
                     .findFirst();
+            if (entity == null) {
+                return null;
+            }
+            return DiverLogConverter.createDiverLog(entity);
         }
-        if (entity == null) {
-            return null;
-        }
-        return DiverLogConverter.createDiverLog(entity);
     }
 
     @Override
