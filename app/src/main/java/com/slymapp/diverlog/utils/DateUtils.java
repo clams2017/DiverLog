@@ -1,12 +1,16 @@
 package com.slymapp.diverlog.utils;
 
+
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
+ * 日付整形用クラス
  * Created by kaito on 18/01/27.
  */
 
@@ -21,5 +25,10 @@ public class DateUtils {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return toDateString(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+    }
+
+    public static String toTimeString(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.JAPAN);
+        return sdf.format(date);
     }
 }
