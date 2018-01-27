@@ -76,7 +76,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         void bind(DiverLog diverLog) {
-            divingNumber.setText("No:"+String.valueOf(diverLog.getDivingNumber()));
+            divingNumber.setText(String.valueOf(diverLog.getDivingNumber()));
             place.setText(diverLog.getPlace());
 //            date.setText(diverLog.getDate().toString());
             date.setText(DateUtils.toDateString(diverLog.getDate()));
