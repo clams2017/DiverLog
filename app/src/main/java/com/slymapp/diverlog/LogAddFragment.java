@@ -14,6 +14,13 @@ import android.widget.Toast;
 
 import com.slymapp.diverlog.databinding.FragmentLogAddBinding;
 import com.slymapp.diverlog.utils.DateUtils;
+import com.slymapp.diverlog.domain.DiverLog;
+import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
+
+import org.threeten.bp.DateTimeUtils;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +29,11 @@ import java.util.Date;
  * ログ新規作成画面
  */
 public class LogAddFragment extends Fragment {
+
+    private static final String KEY_DIVER_LOG = "DIVER_LOG";
+
+    private DiverLog diverLog;
+
 
     /**
      * ログ新規作成Fragmentを作成する。
@@ -40,9 +52,20 @@ public class LogAddFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_log_add, container, false);
 
+        // 破棄された時用の復元処理
+        if (savedInstanceState != null) {
+            diverLog = (DiverLog) savedInstanceState.getSerializable(KEY_DIVER_LOG);
+        }
+        if (diverLog == null) {
+            diverLog = new DiverLog();
+            diverLog.setDivingNumber(new DiverLogRepositoryImpl().publishDivingNumber());
+            diverLog.setDate(new Date());
+        }
+
         // DataBindingはViewHolderとしてのみ利用する
         final FragmentLogAddBinding binding = DataBindingUtil.bind(view);
-        binding.logAddDateValue.setText(DateUtils.toDateString(new Date()));
+        binding.logAddDivingNumberValue.setText(String.valueOf(diverLog.getDivingNumber()));
+        binding.logAddDateValue.setText(DateUtils.toDateString(diverLog.getDate()));
         binding.logAddDateValue.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.N)
             @Override
@@ -52,7 +75,10 @@ public class LogAddFragment extends Fragment {
                 new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        binding.logAddDateValue.setText(DateUtils.toDateString(i, i1 + 1, i2));
+                        LocalDateTime dateTime = LocalDateTime.of(i, i1 + 1, i2, 0, 0, 0);
+                        Date date = DateTimeUtils.toDate(dateTime.atZone(ZoneId.systemDefault()).toInstant());
+                        diverLog.setDate(date);
+                        binding.logAddDateValue.setText(DateUtils.toDateString(diverLog.getDate()));
                     }
                 }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
                         .show();
@@ -61,9 +87,21 @@ public class LogAddFragment extends Fragment {
         binding.logAddAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "ログの登録完了!(メッセージのみ)", Toast.LENGTH_SHORT).show();
+                // TODO 入力された情報を用いるよう修正する
+                int divingNumber = Integer.valueOf((String) binding.logAddDivingNumberValue.getText());
+                diverLog.setDivingNumber(divingNumber);
+                String place = binding.logAddPlaceValue.getText().toString();
+                diverLog.setPlace(place);
+                new DiverLogRepositoryImpl().create(diverLog);
+                Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
             }
         });
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(KEY_DIVER_LOG, diverLog);
     }
 }

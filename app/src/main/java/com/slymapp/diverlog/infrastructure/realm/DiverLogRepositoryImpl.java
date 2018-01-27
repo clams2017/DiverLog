@@ -56,6 +56,30 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
         }
     }
 
+    @Override
+    public boolean create(final DiverLog log) {
+        try (Realm realm = Realm.getDefaultInstance()) {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(@NonNull Realm realm) {
+                    DiverLogEntity entity = DiverLogConverter.createEntity(log);
+                    realm.copyToRealmOrUpdate(entity);
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public int publishDivingNumber() {
+        //TODO ログ削除があった場合の動作を確認する
+        try (Realm realm = Realm.getDefaultInstance()) {
+            return (int) realm.where(DiverLogEntity.class).count() + 1;
+        }
+    }
+
     private void initWithMock() {
         try (Realm realm = Realm.getDefaultInstance()) {
             realm.executeTransaction(new Realm.Transaction() {
