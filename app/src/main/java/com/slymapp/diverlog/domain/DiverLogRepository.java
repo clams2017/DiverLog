@@ -20,5 +20,12 @@ public interface DiverLogRepository {
      * @return {@link DiverLog}のリスト
      */
     List<DiverLog> fetchAll();
+
+    /**
+     * 一意となるダイビングナンバーを発行します。
+     *
+     * @return ダイビングナンバー
+     */
+    int publishDivingNumber();
 }
 
