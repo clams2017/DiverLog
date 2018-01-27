@@ -45,7 +45,7 @@ public class LogAddFragment extends Fragment {
         // DataBindingはViewHolderとしてのみ利用する
         final FragmentLogAddBinding binding = DataBindingUtil.bind(view);
         binding.logAddDateValue.setText(toDateString(new Date()));
-        binding.logAddDateValue.setOnClickListener(new View.OnClickListener() {
+        binding.logAddDateImageButton.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
