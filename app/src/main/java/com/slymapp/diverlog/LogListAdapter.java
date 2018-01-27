@@ -71,7 +71,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Fragment fragment = new LogDetailFragment();
+                    Fragment fragment = new LogAddFragment();
                     Bundle args = new Bundle();
                     args.putInt("divingNumber", diverLog.getDivingNumber());
                     fragment.setArguments(args);
