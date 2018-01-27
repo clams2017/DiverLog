@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.slymapp.diverlog.domain.DiverLog;
 import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
+import com.slymapp.diverlog.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,8 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         void bind(DiverLog diverLog) {
             divingNumber.setText(String.valueOf(diverLog.getDivingNumber()));
             place.setText(diverLog.getPlace());
-            date.setText(diverLog.getDate().toString());
+//            date.setText(diverLog.getDate().toString());
+            date.setText(DateUtils.toDateString(diverLog.getDate()));
         }
 
     }
