@@ -1,18 +1,24 @@
 package com.slymapp.diverlog;
 
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.slymapp.diverlog.domain.DiverLog;
 import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
 import com.slymapp.diverlog.utils.DateUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,12 +73,16 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         private TextView divingNumber;
         private TextView place;
         private TextView date;
+        private ImageView image;
+        private Context context;
 
         ItemViewHolder(View itemView) {
             super(itemView);
             divingNumber = itemView.findViewById(R.id.diving_number);
             place = itemView.findViewById(R.id.place);
             date = itemView.findViewById(R.id.date);
+            image = itemView.findViewById(R.id.image);
+            context = itemView.getContext();
         }
 
         void bind(DiverLog diverLog) {
@@ -80,8 +90,8 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             place.setText(diverLog.getPlace());
 //            date.setText(diverLog.getDate().toString());
             date.setText(DateUtils.toDateString(diverLog.getDate()));
-            // ここでサムネ画像を表示する
+            Picasso.with(context).load("file://"+Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DCIM+"/m_9.jpg").fit().into(image);
+            Log.d("log_directory", Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DCIM+"/m_9.jpg");
         }
-
     }
 }

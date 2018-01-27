@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/diverlog.iml" filepath="$PROJECT_DIR$/diverlog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/diverlog.iml" filepath="$PROJECT_DIR$/diverlog.iml" />
     </modules>
   </component>
 </project>
