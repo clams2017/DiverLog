@@ -67,8 +67,8 @@ public class LogDetailFragment extends Fragment {
         place.setText(diverLog.getPlace());
         entryMethod.setText(diverLog.getEntryMethod());
         transparent.setText(String.valueOf(diverLog.getTransparent()));
-        startTime.setText(DateUtils.toDateString(diverLog.getStartTime()));
-        endTime.setText(DateUtils.toDateString(diverLog.getEndTime()));
+        startTime.setText(DateUtils.toTimeString(diverLog.getStartTime()));
+        endTime.setText(DateUtils.toTimeString(diverLog.getEndTime()));
         startPressure.setText(String.valueOf(diverLog.getStartPressure()));
         endPressure.setText(String.valueOf(diverLog.getEndPressure()));
         suits.setText(diverLog.getSuits());
