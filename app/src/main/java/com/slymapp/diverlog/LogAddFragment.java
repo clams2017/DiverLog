@@ -13,14 +13,9 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.slymapp.diverlog.databinding.FragmentLogAddBinding;
-import com.slymapp.diverlog.utils.DateUtils;
 import com.slymapp.diverlog.domain.DiverLog;
 import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
-
-import org.threeten.bp.DateTimeUtils;
-import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.ZoneId;
-import org.threeten.bp.format.DateTimeFormatter;
+import com.slymapp.diverlog.utils.DateUtils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -75,8 +70,7 @@ public class LogAddFragment extends Fragment {
                 new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        LocalDateTime dateTime = LocalDateTime.of(i, i1 + 1, i2, 0, 0, 0);
-                        Date date = DateTimeUtils.toDate(dateTime.atZone(ZoneId.systemDefault()).toInstant());
+                        Date date = DateUtils.createFromDate(i, i1 + 1, i2);
                         diverLog.setDate(date);
                         binding.logAddDateValue.setText(DateUtils.toDateString(diverLog.getDate()));
                     }
@@ -91,17 +85,5 @@ public class LogAddFragment extends Fragment {
             }
         });
         return view;
-    }
-
-    private String toDateString(int year, int month, int day) {
-        // TODO 日付の暫定対応を修正する
-        LocalDateTime dateTime = LocalDateTime.of(year, month, day, 0, 0, 0);
-        return dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-    }
-
-    private String toDateString(Date date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        return toDateString(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
     }
 }
