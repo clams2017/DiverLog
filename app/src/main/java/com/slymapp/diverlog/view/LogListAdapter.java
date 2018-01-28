@@ -1,20 +1,19 @@
-package com.slymapp.diverlog;
+package com.slymapp.diverlog.view;
 
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.slymapp.diverlog.R;
 import com.slymapp.diverlog.domain.DiverLog;
 import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
 import com.slymapp.diverlog.utils.DateUtils;
@@ -73,7 +72,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         void bind(final DiverLog diverLog) {
-            divingNumber.setText("ID: " + String.valueOf(diverLog.getDivingNumber()));
+            divingNumber.setText(context.getString(R.string.id_with_value, diverLog.getDivingNumber()));
             place.setText(diverLog.getPlace());
             date.setText(DateUtils.toDateString(diverLog.getDate()));
             // とりあえず適当な画像を表示する

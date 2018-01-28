@@ -1,4 +1,4 @@
-package com.slymapp.diverlog;
+package com.slymapp.diverlog.view;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.slymapp.diverlog.R;
 
 public class MainActivity extends AppCompatActivity
         implements LogDetailFragment.OnFragmentInteractionListener {

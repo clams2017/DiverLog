@@ -5,5 +5,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_log">ログを追加</string>
+    <string name="diving_number">ダイブNo</string>
+    <string name="date">日付</string>
+    <string name="change_date">日時変更</string>
+    <string name="place">場所</string>
+    <string name="place_example">しじみがトゥルルって頑張ってる海</string>
+    <string name="add_with_exclamation">登録！</string>
+    <string name="id_with_value">ID:%1$d</string>
 
 </resources>
