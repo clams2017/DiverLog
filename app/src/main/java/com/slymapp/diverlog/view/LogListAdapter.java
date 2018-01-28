@@ -72,7 +72,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         void bind(final DiverLog diverLog) {
-            divingNumber.setText("ID: " + String.valueOf(diverLog.getDivingNumber()));
+            divingNumber.setText(context.getString(R.string.id_with_value, diverLog.getDivingNumber()));
             place.setText(diverLog.getPlace());
             date.setText(DateUtils.toDateString(diverLog.getDate()));
             // とりあえず適当な画像を表示する
