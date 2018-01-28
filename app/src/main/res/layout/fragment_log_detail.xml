@@ -9,7 +9,7 @@
         android:background="@android:color/background_light"
         android:clickable="true"
         android:focusable="true"
-        tools:context="com.slymapp.diverlog.LogDetailFragment">
+        tools:context="com.slymapp.diverlog.view.LogDetailFragment">
 
         <TextView
             android:id="@+id/diving_number"

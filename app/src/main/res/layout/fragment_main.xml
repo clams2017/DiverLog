@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    tools:context="com.slymapp.diverlog.DummyFragment"
+    tools:context="com.slymapp.diverlog.view.DummyFragment"
     tools:showIn="@layout/activity_main">
 
     <TextView

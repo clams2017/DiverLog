@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/background_light"
         android:clickable="true"
-        tools:context="com.slymapp.diverlog.LogAddFragment">
+        tools:context="com.slymapp.diverlog.view.LogAddFragment">
 
         <TextView
             android:id="@+id/log_add_diving_number_label"

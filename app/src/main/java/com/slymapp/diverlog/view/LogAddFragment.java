@@ -1,4 +1,4 @@
-package com.slymapp.diverlog;
+package com.slymapp.diverlog.view;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.slymapp.diverlog.R;
 import com.slymapp.diverlog.databinding.FragmentLogAddBinding;
 import com.slymapp.diverlog.domain.DiverLog;
 import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
