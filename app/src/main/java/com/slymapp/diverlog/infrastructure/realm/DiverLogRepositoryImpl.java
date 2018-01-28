@@ -56,7 +56,7 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
     }
 
     @Override
-    public boolean create(final DiverLog log) {
+    public void upsert(final DiverLog log) {
         try (Realm realm = Realm.getDefaultInstance()) {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
@@ -65,9 +65,6 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
                     realm.copyToRealmOrUpdate(entity);
                 }
             });
-            return true;
-        } catch (Exception e) {
-            return false;
         }
     }
 

@@ -33,12 +33,8 @@ public class DiverLogRepositoryMock implements DiverLogRepository {
     }
 
     @Override
-    public boolean create(DiverLog log) {
-        if (diverLogSparseArray.get(log.getDivingNumber()) != null) {
-            return false;
-        }
+    public void upsert(DiverLog log) {
         diverLogSparseArray.put(log.getDivingNumber(), log);
-        return true;
     }
 
     @Override
