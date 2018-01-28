@@ -51,6 +51,11 @@ public class LogAddFragment extends Fragment {
         if (savedInstanceState != null) {
             diverLog = (DiverLog) savedInstanceState.getSerializable(KEY_DIVER_LOG);
         }
+        else if (getArguments() != null){
+            int divingNo = getArguments().getInt("divingNumber");
+            DiverLogRepositoryImpl rep = new DiverLogRepositoryImpl();
+            diverLog = rep.fetch(divingNo);
+        }
         if (diverLog == null) {
             diverLog = new DiverLog();
             diverLog.setDivingNumber(new DiverLogRepositoryImpl().publishDivingNumber());
@@ -61,6 +66,7 @@ public class LogAddFragment extends Fragment {
         final FragmentLogAddBinding binding = DataBindingUtil.bind(view);
         binding.logAddDivingNumberValue.setText(String.valueOf(diverLog.getDivingNumber()));
         binding.logAddDateValue.setText(DateUtils.toDateString(diverLog.getDate()));
+        binding.logAddPlaceValue.setText(diverLog.getPlace());
         binding.logAddDateImageButton.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.N)
             @Override
