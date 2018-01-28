@@ -22,14 +22,14 @@ public interface DiverLogRepository {
     List<DiverLog> fetchAll();
 
     /**
-     * ダイバーログを追加します。
-     * ダイビングナンバーが一意でない場合は追加に失敗します。
-     * 一意となるダイビングナンバーは{@link #publishDivingNumber()}を利用してください。
+     * ダイビングナンバーが一意となっている場合は追加、
+     * ダイビングナンバーが一意でない場合は更新します。
+     * 新しいレコードを追加したい場合は、{@link #publishDivingNumber()}を利用して、
+     * 一意となるダイビングナンバーを発行してください。
      *
      * @param log {@link DiverLog}
-     * @return true→追加成功, false→追加失敗
      */
-    boolean create(DiverLog log);
+    void upsert(DiverLog log);
 
     /**
      * 一意となるダイビングナンバーを発行します。
