@@ -85,7 +85,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 @Override
                 public void onClick(View view) {
                     Intent intent = LogAddActivity.createIntent(context);
-                    intent.putExtra("divingNumber", diverLog.getDivingNumber());
+                    intent.putExtra(LogAddActivity.KEY_DIVER_LOG, diverLog);
                     context.startActivity(intent);
                 }
             });

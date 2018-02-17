@@ -27,7 +27,7 @@ import java.util.Date;
  */
 public class LogAddFragment extends Fragment {
 
-    private static final String KEY_DIVER_LOG = "DIVER_LOG";
+    private static final String KEY_DIVER_LOG = LogAddActivity.KEY_DIVER_LOG;
 
     private DiverLog diverLog;
 
@@ -55,9 +55,7 @@ public class LogAddFragment extends Fragment {
             diverLog = (DiverLog) savedInstanceState.getSerializable(KEY_DIVER_LOG);
         }
         else if (intent != null){
-            int divingNo = intent.getIntExtra("divingNumber", -1);
-            DiverLogRepositoryImpl rep = new DiverLogRepositoryImpl();
-            diverLog = rep.fetch(divingNo);
+            diverLog = (DiverLog) intent.getSerializableExtra(KEY_DIVER_LOG);
         }
         if (diverLog == null) {
             diverLog = new DiverLog();

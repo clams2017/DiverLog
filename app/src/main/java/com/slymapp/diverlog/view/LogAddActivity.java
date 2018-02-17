@@ -9,6 +9,8 @@ import com.slymapp.diverlog.R;
 
 public class LogAddActivity extends AppCompatActivity {
 
+    public static final String KEY_DIVER_LOG = "DIVER_LOG";
+
     /**
      * {@link LogAddActivity}の{@link Intent}を生成する
      *
