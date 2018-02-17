@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.slymapp.diverlog.R;
+import com.slymapp.diverlog.domain.DiverLog;
 
 public class LogAddActivity extends AppCompatActivity {
 
@@ -19,6 +20,18 @@ public class LogAddActivity extends AppCompatActivity {
      */
     public static Intent createIntent(Context context) {
         return new Intent(context, LogAddActivity.class);
+    }
+
+    /**
+     * {@link LogAddActivity}の{@link Intent}を生成し、{@link DiverLog}を格納する
+     * @param context 遷移元
+     * @param diverLog 編集するログブック
+     * @return {@link Intent}
+     */
+    public static Intent createIntent(Context context, DiverLog diverLog) {
+        Intent intent = new Intent(context, LogAddActivity.class);
+        intent.putExtra(KEY_DIVER_LOG, diverLog);
+        return intent;
     }
 
     @Override
