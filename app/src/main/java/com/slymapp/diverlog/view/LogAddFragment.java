@@ -2,6 +2,7 @@ package com.slymapp.diverlog.view;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ import java.util.Date;
  */
 public class LogAddFragment extends Fragment {
 
-    private static final String KEY_DIVER_LOG = "DIVER_LOG";
+    private static final String KEY_DIVER_LOG = LogAddActivity.KEY_DIVER_LOG;
 
     private DiverLog diverLog;
 
@@ -47,15 +48,14 @@ public class LogAddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_log_add, container, false);
+        Intent intent = getActivity().getIntent();
 
         // 破棄された時用の復元処理
         if (savedInstanceState != null) {
             diverLog = (DiverLog) savedInstanceState.getSerializable(KEY_DIVER_LOG);
         }
-        else if (getArguments() != null){
-            int divingNo = getArguments().getInt("divingNumber");
-            DiverLogRepositoryImpl rep = new DiverLogRepositoryImpl();
-            diverLog = rep.fetch(divingNo);
+        else if (intent != null){
+            diverLog = (DiverLog) intent.getSerializableExtra(KEY_DIVER_LOG);
         }
         if (diverLog == null) {
             diverLog = new DiverLog();

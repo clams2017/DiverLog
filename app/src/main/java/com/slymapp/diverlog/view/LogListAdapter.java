@@ -2,6 +2,7 @@ package com.slymapp.diverlog.view;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
@@ -22,17 +23,19 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.support.v4.content.ContextCompat.startActivity;
+
 /**
  * ログリストのアダプタークラス
  */
 public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<DiverLog> list = new ArrayList<>();
-    private FragmentManager fragmentManager;
+    private Context context;
 
-    LogListAdapter(FragmentManager fragmentManager) {
+    LogListAdapter(Context context) {
         list = new DiverLogRepositoryImpl().fetchAll(); // TODO 非同期で取得するよう変更する
-        this.fragmentManager = fragmentManager;
+        this.context = context;
     }
 
     @Override
@@ -81,14 +84,8 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Fragment fragment = new LogAddFragment();
-                    Bundle args = new Bundle();
-                    args.putInt("divingNumber", diverLog.getDivingNumber());
-                    fragment.setArguments(args);
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.fragment, fragment)
-                            .addToBackStack(null) // 戻るボタンでreplace前に戻る
-                            .commit();
+                    Intent intent = LogAddActivity.createIntent(context, diverLog);
+                    context.startActivity(intent);
                 }
             });
         }

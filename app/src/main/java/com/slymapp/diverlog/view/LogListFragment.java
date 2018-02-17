@@ -36,7 +36,7 @@ public class LogListFragment extends Fragment {
         // リスト部分のビュー生成
         RecyclerView listView = view.findViewById(R.id.log_list_view);
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new LogListAdapter(getFragmentManager());
+        adapter = new LogListAdapter(getContext());
         listView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(listView.getContext(),
                 new LinearLayoutManager(getActivity()).getOrientation());
