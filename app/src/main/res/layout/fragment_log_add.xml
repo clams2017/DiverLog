@@ -5,9 +5,11 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="5dp"
         android:background="@android:color/background_light"
         android:clickable="true"
         android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
         tools:context="com.slymapp.diverlog.view.LogAddFragment">
 
         <TextView
@@ -16,37 +18,41 @@
             android:layout_height="wrap_content"
             android:labelFor="@+id/log_add_diving_number_value"
             android:text="@string/diving_number"
-            android:textSize="30sp"
+            android:textSize="@dimen/text_size_default"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/log_add_diving_number_value"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="30sp"
+            android:layout_marginStart="5dp"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/text_size_default"
+            android:background="@drawable/underline"
             app:layout_constraintBaseline_toBaselineOf="@id/log_add_diving_number_label"
             app:layout_constraintStart_toEndOf="@id/log_add_diving_number_label"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="1" />
+            tools:text="500" />
 
         <TextView
             android:id="@+id/log_add_date_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:labelFor="@+id/log_add_date_value"
+            android:layout_marginStart="@dimen/block_margin"
             android:text="@string/date"
-            android:textSize="30sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/log_add_diving_number_label" />
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toEndOf="@id/log_add_diving_number_value"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/log_add_date_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="30sp"
+            android:text="@string/date"
+            android:textSize="@dimen/text_size_default"
+            android:background="@drawable/underline"
             app:layout_constraintBaseline_toBaselineOf="@id/log_add_date_label"
             app:layout_constraintStart_toEndOf="@id/log_add_date_label"
             tools:text="2017/12/23" />
@@ -55,7 +61,7 @@
             android:id="@+id/log_add_date_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/element_margin"
             android:contentDescription="@string/change_date"
             android:src="@android:drawable/ic_menu_my_calendar"
             app:layout_constraintBottom_toBottomOf="@id/log_add_date_value"
@@ -69,30 +75,261 @@
             android:layout_height="wrap_content"
             android:labelFor="@+id/log_add_place_value"
             android:text="@string/place"
-            android:textSize="30sp"
+            android:textSize="@dimen/text_size_default"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/log_add_date_label"
             tools:text="場所" />
 
         <EditText
             android:id="@+id/log_add_place_value"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="0.3"
+            android:layout_marginStart="@dimen/element_margin"
             android:inputType="text"
-            android:text="@string/place_example"
-            android:textSize="30sp"
+            android:textSize="@dimen/text_size_default"
+            android:hint="@string/place_hint"
             app:layout_constraintBaseline_toBaselineOf="@id/log_add_place_label"
             app:layout_constraintStart_toEndOf="@id/log_add_place_label"
             tools:text="しじみがとぅるる海" />
+
+        <TextView
+            android:id="@+id/start_pressure_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/start_pressure"
+            android:text="@string/start_pressure_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/log_add_place_label"/>
+
+        <EditText
+            android:id="@+id/start_pressure_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:inputType="number"
+            android:textSize="@dimen/text_size_default"
+            android:hint="@string/pressure_hint"
+            app:layout_constraintBaseline_toBaselineOf="@+id/start_pressure_label"
+            app:layout_constraintStart_toEndOf="@id/start_pressure_label"/>
+
+        <TextView
+            android:id="@+id/end_pressure_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/block_margin"
+            android:labelFor="@+id/end_pressure"
+            android:text="@string/end_pressure_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintBaseline_toBaselineOf="@id/start_pressure_value"
+            app:layout_constraintStart_toEndOf="@id/start_pressure_value"/>
+
+        <EditText
+            android:id="@+id/end_pressure_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:inputType="number"
+            android:textSize="@dimen/text_size_default"
+            android:hint="@string/pressure_hint"
+            app:layout_constraintBaseline_toBaselineOf="@+id/end_pressure_label"
+            app:layout_constraintStart_toEndOf="@id/end_pressure_label"/>
+
+        <TextView
+            android:id="@+id/in_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/in_time"
+            android:text="@string/in_time_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start_pressure_label"/>
+
+        <EditText
+            android:id="@+id/in_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:inputType="text"
+            android:textSize="@dimen/text_size_default"
+            android:hint="@string/time_hint"
+            app:layout_constraintBaseline_toBaselineOf="@+id/in_time_label"
+            app:layout_constraintStart_toEndOf="@id/in_time_label"/>
+
+        <TextView
+            android:id="@+id/out_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/block_margin"
+            android:labelFor="@+id/out_time"
+            android:text="@string/out_time_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toEndOf="@id/in_time_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/in_time_value"/>
+
+        <EditText
+            android:id="@+id/out_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:inputType="text"
+            android:textSize="@dimen/text_size_default"
+            android:hint="@string/time_hint"
+            app:layout_constraintBaseline_toBaselineOf="@+id/out_time_label"
+            app:layout_constraintStart_toEndOf="@id/out_time_label"/>
+
+        <TextView
+            android:id="@+id/entry_way_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/entry_way"
+            android:text="@string/entry_way_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/in_time_label"/>
+
+        <Spinner
+            android:id="@+id/entry_way_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:entries="@array/entry_way"
+            android:spinnerMode="dropdown"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintBaseline_toBaselineOf="@+id/entry_way_label"
+            app:layout_constraintStart_toEndOf="@id/entry_way_label" />
+
+        <TextView
+            android:id="@+id/transparency_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/transparency"
+            android:text="@string/transparency_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/entry_way_label"/>
+
+        <EditText
+            android:id="@+id/transparency_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:inputType="number"
+            android:textSize="@dimen/text_size_default"
+            android:hint="@string/transparency_hint"
+            app:layout_constraintBaseline_toBaselineOf="@+id/transparency_label"
+            app:layout_constraintStart_toEndOf="@id/transparency_label"/>
+
+        <TextView
+            android:id="@+id/suits_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/suits"
+            android:text="@string/suits_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/transparency_label"/>
+
+        <Spinner
+            android:id="@+id/suits_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:entries="@array/suits"
+            android:spinnerMode="dropdown"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintBaseline_toBaselineOf="@+id/suits_label"
+            app:layout_constraintStart_toEndOf="@id/suits_label"/>
+
+        <TextView
+            android:id="@+id/weight_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/transparency"
+            android:text="@string/weight_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suits_label"/>
+
+        <EditText
+            android:id="@+id/weight_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:inputType="number"
+            android:textSize="@dimen/text_size_default"
+            android:hint="@string/weight_hint"
+            app:layout_constraintBaseline_toBaselineOf="@+id/weight_label"
+            app:layout_constraintStart_toEndOf="@id/weight_label"/>
+
+        <TextView
+            android:id="@+id/depth_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/depth"
+            android:text="@string/depth_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weight_label"/>
+
+        <EditText
+            android:id="@+id/depth_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:inputType="number"
+            android:textSize="@dimen/text_size_default"
+            android:hint="@string/depth_hint"
+            app:layout_constraintBaseline_toBaselineOf="@+id/depth_label"
+            app:layout_constraintStart_toEndOf="@id/depth_label"/>
+
+        <TextView
+            android:id="@+id/temperature_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/temperature"
+            android:text="@string/temperature_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/depth_label"/>
+
+        <EditText
+            android:id="@+id/temperature_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:inputType="number"
+            android:textSize="@dimen/text_size_default"
+            android:hint="@string/temperature_hint"
+            app:layout_constraintBaseline_toBaselineOf="@+id/temperature_label"
+            app:layout_constraintStart_toEndOf="@id/temperature_label"/>
+
+        <TextView
+            android:id="@+id/diving_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/diving_time"
+            android:text="@string/diving_time_label"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/temperature_label"/>
+
+        <TextView
+            android:id="@+id/diving_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/element_margin"
+            android:text="@string/diving_time_hint"
+            android:textSize="@dimen/text_size_default"
+            app:layout_constraintBaseline_toBaselineOf="@+id/diving_time_label"
+            app:layout_constraintStart_toEndOf="@id/diving_time_label"/>
 
         <Button
             android:id="@+id/log_add_add_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_with_exclamation"
-            android:textSize="40sp"
+            android:textSize="@dimen/text_size_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
