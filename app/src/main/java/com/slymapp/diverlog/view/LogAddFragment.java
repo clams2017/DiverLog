@@ -87,7 +87,7 @@ public class LogAddFragment extends Fragment {
                         .show();
             }
         });
-        binding.inTimeValue.setOnClickListener(new View.OnClickListener() {
+        binding.logAddInTimeValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
@@ -97,13 +97,13 @@ public class LogAddFragment extends Fragment {
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {
                         Date date = DateUtils.createFromTime(i, i1, 0);
                         diverLog.setStartTime(date);
-                        binding.inTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
+                        binding.logAddInTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
                     }
                 }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true)
                         .show();
             }
         });
-        binding.outTimeValue.setOnClickListener(new View.OnClickListener() {
+        binding.logAddOutTimeValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
@@ -113,7 +113,7 @@ public class LogAddFragment extends Fragment {
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {
                         Date date = DateUtils.createFromTime(i, i1, 0);
                         diverLog.setStartTime(date);
-                        binding.outTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
+                        binding.logAddOutTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
                     }
                 }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true)
                         .show();
