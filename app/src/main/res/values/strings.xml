@@ -28,7 +28,7 @@
     <string name="temperature_hint">℃</string>
     <string name="diving_time_label">ダイブタイム</string>
     <string name="diving_time_hint">ダイブタイム</string>
-    <string name="add_with_exclamation">登録！</string>
+    <string name="submit">登録！</string>
 
     <string-array name="entry_way">
         <item>浜</item>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -5,415 +6,382 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/background_light"
         android:clickable="true"
         android:focusable="true"
-        tools:context="com.slymapp.diverlog.view.LogAddFragment">
+        tools:context="com.slymapp.diverlog.view.LogAddFragment"
 
-        <android.support.v7.widget.LinearLayoutCompat
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent">
+        android:padding="@dimen/content_padding"
+        android:background="@android:color/background_light">
 
-            <android.support.v7.widget.LinearLayoutCompat
-                android:orientation="horizontal"
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/log_add_guideline">
+
+            <android.support.constraint.ConstraintLayout android:id="@+id/log_add_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.LinearLayoutCompat
-                    android:id="@+id/log_add_diving_number_block"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/block_margin"
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_diving_number_block"
+                    style="@style/LabelValueSetBlock"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/log_add_diving_number_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <TextView android:id="@+id/log_add_diving_number_label"
                         android:labelFor="@+id/log_add_diving_number_value"
                         android:text="@string/diving_number"
-                        android:textSize="@dimen/text_size_default"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
 
-                    <TextView
-                        android:id="@+id/log_add_diving_number_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <TextView android:id="@+id/log_add_diving_number_value"
                         android:layout_marginStart="@dimen/value_margin"
-                        android:gravity="center_horizontal"
-                        android:textSize="@dimen/text_size_default"
-                        android:background="@drawable/underline"
-                        tools:text="1" />
+                        app:layout_constraintStart_toEndOf="@id/log_add_diving_number_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_diving_number_label"
+                        style="@style/LogDetailText"
+                        tools:text="1"/>
 
-                </android.support.v7.widget.LinearLayoutCompat>
+                </android.support.constraint.ConstraintLayout>
 
-                <android.support.v7.widget.LinearLayoutCompat
-                    android:id="@+id/log_add_date_block"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/block_margin">
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_date_block"
+                    android:layout_marginStart="@dimen/block_margin"
+                    app:layout_constraintTop_toTopOf="@id/log_add_diving_number_block"
+                    app:layout_constraintStart_toEndOf="@id/log_add_diving_number_block"
+                    style="@style/LabelValueSetBlock">
 
-                    <TextView
-                        android:id="@+id/log_add_date_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <TextView android:id="@+id/log_add_date_label"
                         android:labelFor="@+id/log_add_date_value"
                         android:text="@string/date"
-                        android:textSize="@dimen/text_size_default"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
 
-                    <TextView
-                        android:id="@+id/log_add_date_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/value_margin"
+                    <TextView android:id="@+id/log_add_date_value"
                         android:text="@string/date"
-                        android:textSize="@dimen/text_size_default"
-                        android:background="@drawable/underline"
+                        android:layout_marginStart="@dimen/value_margin"
+                        app:layout_constraintStart_toEndOf="@id/log_add_date_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_date_label"
+                        style="@style/LogDetailText"
                         tools:text="2017/12/23" />
 
-                    <ImageView
-                        android:id="@+id/log_add_date_image_button"
+                    <ImageView android:id="@+id/log_add_date_image_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/value_margin"
                         android:contentDescription="@string/change_date"
                         android:src="@android:drawable/ic_menu_my_calendar"
+                        app:layout_constraintStart_toEndOf="@id/log_add_date_value"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         tools:src="@android:drawable/ic_menu_my_calendar" />
 
-                </android.support.v7.widget.LinearLayoutCompat>
-            </android.support.v7.widget.LinearLayoutCompat>
+                </android.support.constraint.ConstraintLayout>
 
-            <android.support.v7.widget.LinearLayoutCompat
-                android:id="@+id/log_add_place_block"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/block_margin">
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_place_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_diving_number_block"
+                    style="@style/LabelValueSetBlock">
 
-                <TextView
-                    android:id="@+id/log_add_place_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/log_add_place_value"
-                    android:text="@string/place"
-                    android:textSize="@dimen/text_size_default"
-                    tools:text="場所" />
+                    <TextView android:id="@+id/log_add_place_label"
+                        android:labelFor="@+id/log_add_place_value"
+                        android:text="@string/place"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
 
-                <EditText
-                    android:id="@+id/log_add_place_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/value_margin"
-                    android:inputType="text"
-                    android:textSize="@dimen/text_size_default"
-                    android:hint="@string/place_hint"
-                    tools:text="しじみがとぅるる海" />
+                    <EditText android:id="@+id/log_add_place_value"
+                        android:hint="@string/place_hint"
+                        android:inputType="text"
+                        android:layout_marginStart="@dimen/value_margin"
+                        app:layout_constraintStart_toEndOf="@id/log_add_place_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_place_label"
+                        style="@style/LogDetailText"/>
 
-            </android.support.v7.widget.LinearLayoutCompat>
+                </android.support.constraint.ConstraintLayout>
 
-            <android.support.v7.widget.LinearLayoutCompat
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_start_pressure_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_place_block"
+                    style="@style/LabelValueSetBlock">
 
-                <android.support.v7.widget.LinearLayoutCompat
-                    android:id="@+id/log_add_start_pressure_block"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/block_margin">
-
-                    <TextView
-                        android:id="@+id/log_add_start_pressure_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:labelFor="@+id/start_pressure"
+                    <TextView android:id="@+id/log_add_start_pressure_label"
+                        android:labelFor="@+id/log_add_start_pressure_value"
                         android:text="@string/start_pressure_label"
-                        android:textSize="@dimen/text_size_default"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
 
-                    <EditText
-                        android:id="@+id/log_add_start_pressure_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/value_margin"
+                    <EditText android:id="@+id/log_add_start_pressure_value"
+                        android:hint="@string/pressure_hint"
                         android:inputType="number"
-                        android:textSize="@dimen/text_size_default"
-                        android:hint="@string/pressure_hint"/>
+                        android:layout_marginStart="@dimen/value_margin"
+                        app:layout_constraintStart_toEndOf="@id/log_add_start_pressure_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_start_pressure_label"
+                        style="@style/LogDetailText"/>
 
-                </android.support.v7.widget.LinearLayoutCompat>
+                </android.support.constraint.ConstraintLayout>
 
-                <android.support.v7.widget.LinearLayoutCompat
-                    android:id="@+id/log_add_end_pressure_block"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/block_margin">
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_end_pressure_block"
+                    android:layout_marginStart="@dimen/block_margin"
+                    app:layout_constraintStart_toEndOf="@id/log_add_start_pressure_block"
+                    app:layout_constraintTop_toTopOf="@id/log_add_start_pressure_block"
+                    style="@style/LabelValueSetBlock">
 
-                    <TextView
-                        android:id="@+id/log_add_end_pressure_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/block_margin"
-                        android:labelFor="@+id/end_pressure"
+                    <TextView android:id="@+id/log_add_end_pressure_label"
+                        android:labelFor="@+id/end_pressure_value"
                         android:text="@string/end_pressure_label"
-                        android:textSize="@dimen/text_size_default"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
 
-                    <EditText
-                        android:id="@+id/end_pressure_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <EditText android:id="@+id/end_pressure_value"
                         android:layout_marginStart="@dimen/value_margin"
+                        android:hint="@string/pressure_hint"
                         android:inputType="number"
-                        android:textSize="@dimen/text_size_default"
-                        android:hint="@string/pressure_hint"/>
+                        app:layout_constraintStart_toEndOf="@id/log_add_end_pressure_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_end_pressure_label"
+                        style="@style/LogDetailText"/>
 
-                </android.support.v7.widget.LinearLayoutCompat>
-            </android.support.v7.widget.LinearLayoutCompat>
+                </android.support.constraint.ConstraintLayout>
 
-            <android.support.v7.widget.LinearLayoutCompat
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_in_time_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_start_pressure_block"
+                    style="@style/LabelValueSetBlock">
 
-                <android.support.v7.widget.LinearLayoutCompat
-                    android:id="@+id/log_add_in_time_block"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/block_margin">
-
-                    <TextView
-                        android:id="@+id/log_add_in_time_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:labelFor="@+id/in_time"
+                    <TextView android:id="@+id/log_add_in_time_label"
+                        android:labelFor="@+id/log_add_in_time_value"
                         android:text="@string/in_time_label"
-                        android:textSize="@dimen/text_size_default"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
 
-                    <EditText
-                        android:id="@+id/log_add_in_time_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/value_margin"
+                    <EditText android:id="@+id/log_add_in_time_value"
                         android:inputType="text"
-                        android:textSize="@dimen/text_size_default"
-                        android:hint="@string/time_hint"/>
+                        android:hint="@string/time_hint"
+                        android:layout_marginStart="@dimen/value_margin"
+                        app:layout_constraintStart_toEndOf="@id/log_add_in_time_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_in_time_label"
+                        style="@style/LogDetailText"/>
 
-                </android.support.v7.widget.LinearLayoutCompat>
+                </android.support.constraint.ConstraintLayout>
 
-                <android.support.v7.widget.LinearLayoutCompat
-                    android:id="@+id/log_add_out_time_block"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/block_margin">
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_out_time_block"
+                    android:layout_marginStart="@dimen/block_margin"
+                    app:layout_constraintStart_toEndOf="@id/log_add_in_time_block"
+                    app:layout_constraintTop_toTopOf="@id/log_add_in_time_block"
+                    style="@style/LabelValueSetBlock">
+
+                    <TextView android:id="@+id/log_add_out_time_label"
+                        android:labelFor="@+id/log_add_out_time_value"
+                        android:text="@string/out_time_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
+
+                    <EditText android:id="@+id/log_add_out_time_value"
+                        android:hint="@string/time_hint"
+                        android:inputType="text"
+                        android:layout_marginStart="@dimen/value_margin"
+                        android:textSize="@dimen/text_size_md"
+                        app:layout_constraintStart_toEndOf="@id/log_add_out_time_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_out_time_label"
+                        style="@style/LogDetailText"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_entry_way_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_in_time_block"
+                    style="@style/LabelValueSetBlock">
+
+                    <TextView android:id="@+id/log_add_entry_way_label"
+                        android:labelFor="@+id/log_add_entry_way_value"
+                        android:text="@string/entry_way_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
+
+                    <Spinner android:id="@+id/log_add_entry_way_value"
+                        android:layout_marginStart="@dimen/value_margin"
+                        android:entries="@array/entry_way"
+                        android:spinnerMode="dropdown"
+                        app:layout_constraintStart_toEndOf="@id/log_add_entry_way_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_entry_way_label"
+                        style="@style/LogDetailText"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_transparency_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_entry_way_block"
+                    style="@style/LabelValueSetBlock">
+
+                    <TextView android:id="@+id/log_add_transparency_label"
+                        android:labelFor="@+id/log_add_transparency_value"
+                        android:text="@string/transparency_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
+
+                    <EditText android:id="@+id/log_add_transparency_value"
+                        android:layout_marginStart="@dimen/value_margin"
+                        android:hint="@string/transparency_hint"
+                        android:inputType="number"
+                        app:layout_constraintStart_toEndOf="@id/log_add_transparency_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_transparency_label"
+                        style="@style/LogDetailText"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_suits_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_transparency_block"
+                    style="@style/LabelValueSetBlock">
+
+                    <TextView android:id="@+id/log_add_suits_label"
+                        android:labelFor="@+id/log_add_suits_value"
+                        android:text="@string/suits_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
+
+                    <Spinner android:id="@+id/log_add_suits_value"
+                        android:layout_marginStart="@dimen/value_margin"
+                        android:entries="@array/suits"
+                        android:spinnerMode="dropdown"
+                        app:layout_constraintStart_toEndOf="@id/log_add_suits_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_suits_label"
+                        style="@style/LogDetailText"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_weight_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_suits_block"
+                    style="@style/LabelValueSetBlock">
+
+                    <TextView android:id="@+id/log_add_weight_label"
+                        android:labelFor="@+id/log_add_weight_value"
+                        android:text="@string/weight_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
+
+                    <EditText android:id="@+id/log_add_weight_value"
+                        android:hint="@string/weight_hint"
+                        android:inputType="number"
+                        android:layout_marginStart="@dimen/value_margin"
+                        app:layout_constraintStart_toEndOf="@id/log_add_weight_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_weight_label"
+                        style="@style/LogDetailText"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_depth_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_weight_block"
+                    style="@style/LabelValueSetBlock">
+
+                    <TextView android:id="@+id/log_add_depth_label"
+                        android:labelFor="@+id/log_add_depth_value"
+                        android:text="@string/depth_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailText"/>
+
+                    <EditText android:id="@+id/log_add_depth_value"
+                        android:hint="@string/depth_hint"
+                        android:inputType="number"
+                        android:layout_marginStart="@dimen/value_margin"
+                        app:layout_constraintStart_toEndOf="@id/log_add_depth_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_depth_label"
+                        style="@style/LogDetailText"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_temperature_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_depth_block"
+                    style="@style/LabelValueSetBlock">
 
                     <TextView
-                        android:id="@+id/log_add_out_time_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/block_margin"
-                        android:labelFor="@+id/out_time"
-                        android:text="@string/out_time_label"
-                        android:textSize="@dimen/text_size_default"/>
+                        android:id="@+id/log_add_temperature_label"
+                        android:labelFor="@+id/log_add_temperature_value"
+                        android:text="@string/temperature_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailLabel"/>
 
                     <EditText
-                        android:id="@+id/log_add_out_time_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/value_margin"
-                        android:inputType="text"
-                        android:textSize="@dimen/text_size_default"
-                        android:hint="@string/time_hint"/>
+                        android:id="@id/log_add_temperature_value"
+                        android:hint="@string/temperature_hint"
+                        android:inputType="number"
+                        app:layout_constraintStart_toEndOf="@id/log_add_temperature_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_temperature_label"
+                        style="@style/LogDetailValue"/>
 
-                </android.support.v7.widget.LinearLayoutCompat>
-            </android.support.v7.widget.LinearLayoutCompat>
+                </android.support.constraint.ConstraintLayout>
 
-            <android.support.v7.widget.LinearLayoutCompat
-                android:id="@+id/log_add_entry_way_block"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/block_margin">
+                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_diving_time_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_temperature_block"
+                    style="@style/LabelValueSetBlock">
 
-            <TextView
-                    android:id="@+id/log_add_entry_way_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/entry_way"
-                    android:text="@string/entry_way_label"
-                    android:textSize="@dimen/text_size_default"/>
+                    <TextView android:id="@+id/log_add_diving_time_label"
+                        android:labelFor="@+id/log_add_diving_time_value"
+                        android:text="@string/diving_time_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/LogDetailLabel"/>
 
-                <Spinner
-                    android:id="@+id/log_add_entry_way_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/value_margin"
-                    android:entries="@array/entry_way"
-                    android:spinnerMode="dropdown"
-                    android:textSize="@dimen/text_size_default"/>
+                    <TextView android:id="@id/log_add_diving_time_value"
+                        android:text="@string/diving_time_hint"
+                        app:layout_constraintStart_toEndOf="@id/log_add_diving_time_label"
+                        app:layout_constraintBaseline_toBaselineOf="@id/log_add_diving_time_label"
+                        style="@style/LogDetailValue"/>
 
-            </android.support.v7.widget.LinearLayoutCompat>
+                </android.support.constraint.ConstraintLayout>
+              </android.support.constraint.ConstraintLayout>
 
-            <android.support.v7.widget.LinearLayoutCompat
-                android:id="@+id/log_add_tranceparency_block"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/block_margin">
+        </ScrollView>
 
-                <TextView
-                    android:id="@+id/log_add_transparency_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/transparency"
-                    android:text="@string/transparency_label"
-                    android:textSize="@dimen/text_size_default"/>
-
-                <EditText
-                    android:id="@+id/log_add_transparency_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/value_margin"
-                    android:inputType="number"
-                    android:textSize="@dimen/text_size_default"
-                    android:hint="@string/transparency_hint"/>
-
-            </android.support.v7.widget.LinearLayoutCompat>
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:id="@+id/log_add_suits_block"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/block_margin">
-
-                <TextView
-                    android:id="@+id/log_add_suits_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/suits"
-                    android:text="@string/suits_label"
-                    android:textSize="@dimen/text_size_default"/>
-
-                <Spinner
-                    android:id="@+id/log_add_suits_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/value_margin"
-                    android:entries="@array/suits"
-                    android:spinnerMode="dropdown"
-                    android:textSize="@dimen/text_size_default"/>
-
-            </android.support.v7.widget.LinearLayoutCompat>
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:id="@+id/log_add_weight_block"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/block_margin">
-
-                <TextView
-                    android:id="@+id/log_add_weight_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/transparency"
-                    android:text="@string/weight_label"
-                    android:textSize="@dimen/text_size_default"/>
-
-                <EditText
-                    android:id="@+id/log_add_weight_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/value_margin"
-                    android:inputType="number"
-                    android:textSize="@dimen/text_size_default"
-                    android:hint="@string/weight_hint"/>
-
-            </android.support.v7.widget.LinearLayoutCompat>
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:id="@+id/log_add_depth_block"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/block_margin">
-
-                <TextView
-                    android:id="@+id/log_add_depth_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/depth"
-                    android:text="@string/depth_label"
-                    android:textSize="@dimen/text_size_default"/>
-
-                <EditText
-                    android:id="@+id/log_add_depth_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/value_margin"
-                    android:inputType="number"
-                    android:textSize="@dimen/text_size_default"
-                    android:hint="@string/depth_hint"/>
-
-            </android.support.v7.widget.LinearLayoutCompat>
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:id="@+id/log_add_temperature_block"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/block_margin">
-
-                <TextView
-                    android:id="@+id/log_add_temperature_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/temperature"
-                    android:text="@string/temperature_label"
-                    android:textSize="@dimen/text_size_default"/>
-
-                <EditText
-                    android:id="@+id/log_add_temperature_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/value_margin"
-                    android:inputType="number"
-                    android:textSize="@dimen/text_size_default"
-                    android:hint="@string/temperature_hint"/>
-
-            </android.support.v7.widget.LinearLayoutCompat>
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:id="@+id/log_add_diving_time_block"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/block_margin">
-
-                <TextView
-                    android:id="@+id/log_add_diving_time_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/diving_time"
-                    android:text="@string/diving_time_label"
-                    android:textSize="@dimen/text_size_default"/>
-
-                <TextView
-                    android:id="@+id/log_add_diving_time_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/value_margin"
-                    android:text="@string/diving_time_hint"
-                    android:textSize="@dimen/text_size_default"/>
-
-            </android.support.v7.widget.LinearLayoutCompat>
-        </android.support.v7.widget.LinearLayoutCompat>
-
-        <Button
-            android:id="@+id/log_add_add_btn"
+        <android.support.constraint.Guideline android:id="@+id/log_add_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_with_exclamation"
-            android:textSize="@dimen/text_size_large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/submit_area_size"/>
+
+        <com.beardedhen.androidbootstrap.BootstrapButton android:id="@+id/log_add_submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="登録！" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/log_add_guideline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:bootstrapBrand="success"
+            app:bootstrapSize="xl"
+            app:buttonMode="regular"
+            app:showOutline="false"
+            app:roundedCorners="true"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

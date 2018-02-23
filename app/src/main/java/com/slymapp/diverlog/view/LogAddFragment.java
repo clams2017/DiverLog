@@ -119,7 +119,7 @@ public class LogAddFragment extends Fragment {
                         .show();
             }
         });
-        binding.logAddAddBtn.setOnClickListener(new View.OnClickListener() {
+        binding.logAddSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "ログの登録完了!(メッセージのみ)", Toast.LENGTH_SHORT).show();
