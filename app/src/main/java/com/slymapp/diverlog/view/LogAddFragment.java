@@ -2,6 +2,7 @@ package com.slymapp.diverlog.view;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.slymapp.diverlog.R;
@@ -85,7 +87,39 @@ public class LogAddFragment extends Fragment {
                         .show();
             }
         });
-        binding.logAddAddBtn.setOnClickListener(new View.OnClickListener() {
+        binding.logAddInTimeValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+
+                new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        Date date = DateUtils.createFromTime(i, i1, 0);
+                        diverLog.setStartTime(date);
+                        binding.logAddInTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
+                    }
+                }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true)
+                        .show();
+            }
+        });
+        binding.logAddOutTimeValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+
+                new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        Date date = DateUtils.createFromTime(i, i1, 0);
+                        diverLog.setStartTime(date);
+                        binding.logAddOutTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
+                    }
+                }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true)
+                        .show();
+            }
+        });
+        binding.logAddSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "ログの登録完了!(メッセージのみ)", Toast.LENGTH_SHORT).show();

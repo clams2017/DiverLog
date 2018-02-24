@@ -44,4 +44,6 @@ dependencies {
     compile 'com.beardedhen:androidbootstrap:2.3.2'
 
     testCompile "org.robolectric:robolectric:3.6.1"
+
+    compile 'com.beardedhen:androidbootstrap:2.3.2'
 }
