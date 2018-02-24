@@ -1,12 +1,17 @@
 package com.slymapp.diverlog.view;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.slymapp.diverlog.R;
+import com.slymapp.diverlog.databinding.FragmentDummyBinding;
+import com.slymapp.diverlog.domain.DiverLogCsvExporter;
+import com.slymapp.diverlog.domain.DiverLogExporter;
 
 /**
  * Hello Worldを表示する、画面遷移の実装のダミー画面
@@ -16,6 +21,17 @@ public class DummyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_dummy, container, false);
+        FragmentDummyBinding binding = DataBindingUtil.bind(view);
+        binding.sampleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DiverLogExporter exporter = new DiverLogCsvExporter();
+                exporter.exportAllLog(getContext(), "DiverLogList.csv");
+                Toast.makeText(view.getContext(), "exported!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return view;
     }
+
 }
