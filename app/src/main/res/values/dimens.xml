@@ -7,6 +7,7 @@
     <dimen name="content_padding">10dp</dimen>
     <dimen name="block_margin">10dp</dimen>
     <dimen name="value_margin">5dp</dimen>
+    <dimen name="input_margin">5dp</dimen>
     <dimen name="submit_area_size">80sp</dimen>
 
     <dimen name="default_text_padding">10sp</dimen>
