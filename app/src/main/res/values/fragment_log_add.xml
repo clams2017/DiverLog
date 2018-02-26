@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="LabelValueSetInput">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:baselineAligned">true</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-
     <style name="LogDetailText" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -17,12 +10,6 @@
         <item name="android:paddingBottom">@dimen/default_text_padding_bottom</item>
         <item name="android:textColor">@color/bootstrap_brand_secondary_text</item>
         <item name="android:textSize">@dimen/text_size_md</item>
-    </style>
-
-    <style name="LogDetailLabel" parent="LogDetailText"></style>
-
-    <style name="LogDetailValue" parent="LogDetailText">
-        <item name="android:layout_marginStart">@dimen/input_margin</item>
     </style>
 
 </resources>
