@@ -80,7 +80,7 @@
                     <android.support.design.widget.TextInputEditText android:id="@+id/log_add_weather_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:hint="@string/weather_hint"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -163,43 +163,19 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.constraint.ConstraintLayout android:id="@+id/log_add_entry_way_input"
+                <android.support.design.widget.TextInputLayout android:id="@+id/log_add_entry_way_input"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:labelFor="@+id/log_add_entry_way_value"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/log_add_in_time_input">
 
-                    <com.beardedhen.androidbootstrap.BootstrapDropDown android:id="@+id/log_add_entry_way_value"
+                    <Spinner android:id="@+id/log_add_entry_way_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:bootstrapText="@string/entry_way_hint"
-                        app:bootstrapBrand="secondary"
-                        app:roundedCorners="true"
-                        app:bootstrapSize="md"
-                        app:dropdownResource="@array/entry_way"
-                        app:bootstrapExpandDirection="down"/>
-
-                </android.support.constraint.ConstraintLayout>
-
-                <android.support.design.widget.TextInputLayout android:id="@+id/log_add_suits_input"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/log_add_suits_value"
-                    app:layout_constraintStart_toStartOf="@id/log_add_center_vertical_guideline"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/log_add_out_time_input">
-
-                    <com.beardedhen.androidbootstrap.BootstrapDropDown android:id="@+id/log_add_suits_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:bootstrapText="@string/suits_hint"
-                        app:bootstrapBrand="secondary"
-                        app:roundedCorners="true"
-                        app:bootstrapSize="md"
-                        app:dropdownResource="@array/suits"
-                        app:bootstrapExpandDirection="down"/>
+                        android:entries="@array/entry_way"
+                        android:spinnerMode="dropdown"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -208,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:labelFor="@+id/log_add_transparency_value"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/log_add_entry_way_input">
 
                     <android.support.design.widget.TextInputEditText android:id="@+id/log_add_transparency_value"
@@ -219,11 +195,27 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <android.support.design.widget.TextInputLayout android:id="@+id/log_add_suits_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_suits_value"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_transparency_input">
+
+                    <Spinner android:id="@+id/log_add_suits_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/suits"
+                        android:spinnerMode="dropdown"/>
+
+                </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout android:id="@+id/log_add_weight_input"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:labelFor="@+id/log_add_weight_value"
-                    app:layout_constraintStart_toStartOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/log_add_suits_input">
 
@@ -272,7 +264,7 @@
                     android:layout_height="wrap_content"
                     android:labelFor="@+id/log_add_temperature_value"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/log_add_max_depth_input">
 
                     <android.support.design.widget.TextInputEditText android:id="@id/log_add_temperature_value"
@@ -288,7 +280,7 @@
                     android:layout_height="wrap_content"
                     android:labelFor="@+id/log_add_diving_time_value"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/log_add_temperature_input">
 
                     <android.support.design.widget.TextInputEditText android:id="@id/log_add_diving_time_value"
