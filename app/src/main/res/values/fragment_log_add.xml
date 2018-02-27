@@ -19,10 +19,4 @@
         <item name="android:textSize">@dimen/text_size_md</item>
     </style>
 
-    <style name="LogDetailLabel" parent="LogDetailText"></style>
-
-    <style name="LogDetailValue" parent="LogDetailText">
-        <item name="android:layout_marginStart">@dimen/input_margin</item>
-    </style>
-
 </resources>
