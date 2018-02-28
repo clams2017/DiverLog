@@ -131,6 +131,9 @@ public class LogAddFragment extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
                 new DiverLogRepositoryImpl().upsert(bindInputValues(binding));
+                Context context = getContext();
+                Intent intent = MainActivity.createIntent(context);
+                context.startActivity(intent);
             }
         });
         binding.logAddMainLayout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
