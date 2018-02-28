@@ -66,16 +66,20 @@ public class LogAddFragment extends Fragment {
             diverLog = (DiverLog) intent.getSerializableExtra(KEY_DIVER_LOG);
         }
         if (diverLog == null) {
+            // TODO Builderクラスに移行する
             diverLog = new DiverLog();
             diverLog.setDivingNumber(new DiverLogRepositoryImpl().publishDivingNumber());
+            diverLog.setWeather("");
+            diverLog.setPlace("");
             diverLog.setDate(new Date());
+            diverLog.setStartTime(new Date());
+            diverLog.setEndTime(new Date());
         }
 
         // DataBindingはViewHolderとしてのみ利用する
         final FragmentLogAddBinding binding = DataBindingUtil.bind(mainView);
-        binding.logAddDivingNumberValue.setText(String.valueOf(diverLog.getDivingNumber()));
-        binding.logAddDateValue.setText(DateUtils.toDateString(diverLog.getDate()));
-        binding.logAddPlaceValue.setText(diverLog.getPlace());
+        bindDefaultValues(diverLog, binding);
+
         binding.logAddDateValue.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.N)
             @Override
@@ -128,7 +132,7 @@ public class LogAddFragment extends Fragment {
         binding.logAddSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "ログの登録完了!(メッセージのみ)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
             }
         });
         binding.logAddMainLayout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -144,5 +148,24 @@ public class LogAddFragment extends Fragment {
             }
         });
         return mainView;
+    }
+
+    private void bindDefaultValues(DiverLog diverLog, FragmentLogAddBinding binding){
+        binding.logAddDivingNumberValue.setText(String.valueOf(diverLog.getDivingNumber()));
+        binding.logAddDateValue.setText(DateUtils.toDateString(diverLog.getDate()));
+        binding.logAddWeatherValue.setText(diverLog.getWeather());
+        binding.logAddPlaceValue.setText(diverLog.getPlace());
+        binding.logAddStartPressureValue.setText(String.valueOf(diverLog.getStartPressure()));
+        binding.logAddEndPressureValue.setText(String.valueOf(diverLog.getEndPressure()));
+        binding.logAddInTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
+        binding.logAddOutTimeValue.setText(DateUtils.toTimeString(diverLog.getEndTime()));
+        binding.logAddEntryWayValue.setText(diverLog.getEntryMethod());
+        binding.logAddSuitsValue.setText(diverLog.getSuits());
+        binding.logAddTransparencyValue.setText(String.valueOf(diverLog.getTransparent()));
+        binding.logAddWeightValue.setText(String.valueOf(diverLog.getWeight()));
+        binding.logAddMaxDepthValue.setText(String.valueOf(diverLog.getMaxDepth()));
+        binding.logAddAverageDepthValue.setText(String.valueOf(diverLog.getAverageDepth()));
+        binding.logAddTemperatureValue.setText(String.valueOf(diverLog.getTemperature()));
+        // TODO 合計ダイブタイムをbindingする
     }
 }
