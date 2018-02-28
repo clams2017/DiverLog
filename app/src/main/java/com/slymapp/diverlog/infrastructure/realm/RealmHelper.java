@@ -26,4 +26,20 @@ public class RealmHelper {
                         .build()
         );
     }
+
+    // TODO アプリ起動時にログを全削除する。ログ削除機能実装後に削除予定
+    public static void reset(Context context) {
+        Realm.init(context);
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
+                .schemaVersion(0L)
+                .migration(new RealmMigration() {
+                    @Override
+                    public void migrate(DynamicRealm realm, long oldVersion, long newVersion) {
+
+                    }
+                })
+                .build();
+        Realm.deleteRealm(realmConfig);
+        Realm.setDefaultConfiguration(realmConfig);
+    }
 }
