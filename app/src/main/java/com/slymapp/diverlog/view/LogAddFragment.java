@@ -59,15 +59,15 @@ public class LogAddFragment extends Fragment {
         if (savedInstanceState != null) {
             diverLog = (DiverLog) savedInstanceState.getSerializable(KEY_DIVER_LOG);
         }
+        // updateするログを受け取る
         else if (intent != null){
             diverLog = (DiverLog) intent.getSerializableExtra(KEY_DIVER_LOG);
         }
+        // insert時はデフォルト値を入力済みにする
         if (diverLog == null) {
             // TODO Builderクラスに移行する
             diverLog = new DiverLog();
             diverLog.setDivingNumber(new DiverLogRepositoryImpl().publishDivingNumber());
-            diverLog.setWeather("");
-            diverLog.setPlace("");
             diverLog.setDate(new Date());
             diverLog.setStartTime(new Date());
             diverLog.setEndTime(new Date());
@@ -133,10 +133,10 @@ public class LogAddFragment extends Fragment {
                 Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
                 new DiverLogRepositoryImpl().upsert(bindInputValues(binding));
                 Context context = getContext();
-                Intent intent = MainActivity.createIntent(context);
-                context.startActivity(intent);
+                context.startActivity(MainActivity.createIntent(context));
             }
         });
+        // EditTextからフォーカスを外したときにキーボードを隠す
         binding.logAddMainLayout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
