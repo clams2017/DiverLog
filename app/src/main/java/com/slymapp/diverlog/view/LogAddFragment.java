@@ -126,6 +126,7 @@ public class LogAddFragment extends Fragment {
                         .show();
             }
         });
+        // TODO DiverLogRepositoryImpl()でモックデータを上書き保存しているため、No.1-5はログデータ変更不可
         binding.logAddSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
