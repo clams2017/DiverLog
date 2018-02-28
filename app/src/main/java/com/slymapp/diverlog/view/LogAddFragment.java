@@ -175,7 +175,7 @@ public class LogAddFragment extends Fragment {
 
         diverLog.setDivingNumber(Integer.parseInt(toString(binding.logAddDivingNumberValue)));
         diverLog.setDate(DateUtils.createFromDate(toString(binding.logAddDateValue)));
-        diverLog.setTemperature(Float.parseFloat(toString(binding.logAddTemperatureValue)));
+        diverLog.setWeather(toString(binding.logAddWeatherValue));
         diverLog.setPlace(toString(binding.logAddPlaceValue));
         diverLog.setStartPressure(Integer.parseInt(toString(binding.logAddStartPressureValue)));
         diverLog.setEndPressure(Integer.parseInt(toString(binding.logAddEndPressureValue)));
