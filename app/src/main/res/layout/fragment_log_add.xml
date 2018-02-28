@@ -1,102 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/log_add_main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/background_light"
         android:clickable="true"
         android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="@dimen/content_padding"
         tools:context="com.slymapp.diverlog.view.LogAddFragment">
 
-        <TextView
-            android:id="@+id/log_add_diving_number_label"
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/log_add_diving_number_input"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:labelFor="@+id/log_add_diving_number_value"
-            android:text="@string/diving_number"
-            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/log_add_diving_number_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="30sp"
-            app:layout_constraintBaseline_toBaselineOf="@id/log_add_diving_number_label"
-            app:layout_constraintStart_toEndOf="@id/log_add_diving_number_label"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="1" />
+            <TextView
+                android:id="@+id/log_add_diving_number_label"
+                android:text="@string/diving_number"
+                style="@style/LogDetailText" />
 
-        <TextView
-            android:id="@+id/log_add_date_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@+id/log_add_date_value"
-            android:text="@string/date"
-            android:textSize="30sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/log_add_diving_number_label" />
+            <TextView
+                android:id="@+id/log_add_diving_number_value"
+                android:layout_marginStart="@dimen/input_margin"
+                app:layout_constraintBaseline_toBaselineOf="@id/log_add_diving_number_label"
+                app:layout_constraintStart_toEndOf="@id/log_add_diving_number_label"
+                tools:text="1"
+                style="@style/LogDetailText"/>
 
-        <TextView
-            android:id="@+id/log_add_date_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="30sp"
-            app:layout_constraintBaseline_toBaselineOf="@id/log_add_date_label"
-            app:layout_constraintStart_toEndOf="@id/log_add_date_label"
-            tools:text="2017/12/23" />
+        </android.support.constraint.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/log_add_date_image_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:contentDescription="@string/change_date"
-            android:src="@android:drawable/ic_menu_my_calendar"
-            app:layout_constraintBottom_toBottomOf="@id/log_add_date_value"
-            app:layout_constraintStart_toEndOf="@id/log_add_date_value"
-            app:layout_constraintTop_toTopOf="@id/log_add_date_value"
-            tools:src="@android:drawable/ic_menu_my_calendar" />
-
-        <TextView
-            android:id="@+id/log_add_place_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@+id/log_add_place_value"
-            android:text="@string/place"
-            android:textSize="30sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/log_add_date_label"
-            tools:text="場所" />
-
-        <EditText
-            android:id="@+id/log_add_place_value"
+        <ScrollView
+            android:id="@+id/log_add_details"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="0.3"
-            android:inputType="text"
-            android:text="@string/place_example"
-            android:textSize="30sp"
-            app:layout_constraintBaseline_toBaselineOf="@id/log_add_place_label"
-            app:layout_constraintStart_toEndOf="@id/log_add_place_label"
-            tools:text="しじみがとぅるる海" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/log_add_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/log_add_diving_number_input">
 
-        <Button
-            android:id="@+id/log_add_add_btn"
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/log_add_center_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_date_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_date_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/date"
+                        android:inputType="text" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_weather_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_weather_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_weather_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/weather_hint"
+                        android:inputType="text" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_place_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_date_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_place_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/place_hint"
+                        android:inputType="text" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_start_pressure_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_start_pressure_value"
+                    app:layout_constraintEnd_toEndOf="@+id/log_add_center_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_place_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_start_pressure_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/start_pressure_hint"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_end_pressure_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_end_pressure_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_place_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_end_pressure_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/end_pressure_hint"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_in_time_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_in_time_value"
+                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_start_pressure_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_in_time_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/in_time_hint"
+                        android:inputType="text" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_out_time_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_out_time_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_start_pressure_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_out_time_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/out_time_hint"
+                        android:inputType="text" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/log_add_entry_way_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_entry_way_value"
+                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_in_time_input">
+
+                    <com.beardedhen.androidbootstrap.BootstrapDropDown
+                        android:id="@+id/log_add_entry_way_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:bootstrapBrand="secondary"
+                        app:bootstrapExpandDirection="down"
+                        app:bootstrapSize="md"
+                        app:bootstrapText="@string/entry_way_hint"
+                        app:dropdownResource="@array/entry_way"
+                        app:roundedCorners="true" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/log_add_suits_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_suits_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_out_time_input">
+
+                    <com.beardedhen.androidbootstrap.BootstrapDropDown
+                        android:id="@+id/log_add_suits_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:bootstrapBrand="secondary"
+                        app:bootstrapExpandDirection="down"
+                        app:bootstrapSize="md"
+                        app:bootstrapText="@string/suits_hint"
+                        app:dropdownResource="@array/suits"
+                        app:roundedCorners="true" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_transparency_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_transparency_value"
+                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_entry_way_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_transparency_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/transparency_hint"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_weight_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_weight_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_suits_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_weight_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/weight_hint"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_average_depth_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_average_depth_value"
+                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_weight_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_average_depth_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/max_depth_hint"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_max_depth_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_max_depth_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_weight_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/log_add_max_depth_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/average_depth_hint"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_temperature_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_temperature_value"
+                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_max_depth_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@id/log_add_temperature_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/temperature_hint"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/log_add_diving_time_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/log_add_diving_time_value"
+                    app:layout_constraintEnd_toEndOf="@id/log_add_center_vertical_guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/log_add_temperature_input">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@id/log_add_diving_time_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/diving_time_hint" />
+
+                </android.support.design.widget.TextInputLayout>
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/log_add_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_with_exclamation"
-            android:textSize="40sp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/submit_area_size" />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/log_add_submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:text="@string/submit"
+            app:bootstrapBrand="success"
+            app:bootstrapSize="xl"
+            app:buttonMode="regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="登録！" />
+            app:layout_constraintTop_toTopOf="@id/log_add_guideline"
+            app:roundedCorners="true"
+            app:showOutline="false" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

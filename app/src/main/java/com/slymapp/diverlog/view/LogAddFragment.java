@@ -1,16 +1,24 @@
 package com.slymapp.diverlog.view;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.slymapp.diverlog.R;
@@ -47,7 +55,7 @@ public class LogAddFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_log_add, container, false);
+        View mainView = inflater.inflate(R.layout.fragment_log_add, container, false);
         Intent intent = getActivity().getIntent();
 
         // 破棄された時用の復元処理
@@ -64,11 +72,11 @@ public class LogAddFragment extends Fragment {
         }
 
         // DataBindingはViewHolderとしてのみ利用する
-        final FragmentLogAddBinding binding = DataBindingUtil.bind(view);
+        final FragmentLogAddBinding binding = DataBindingUtil.bind(mainView);
         binding.logAddDivingNumberValue.setText(String.valueOf(diverLog.getDivingNumber()));
         binding.logAddDateValue.setText(DateUtils.toDateString(diverLog.getDate()));
         binding.logAddPlaceValue.setText(diverLog.getPlace());
-        binding.logAddDateImageButton.setOnClickListener(new View.OnClickListener() {
+        binding.logAddDateValue.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
@@ -85,12 +93,56 @@ public class LogAddFragment extends Fragment {
                         .show();
             }
         });
-        binding.logAddAddBtn.setOnClickListener(new View.OnClickListener() {
+        binding.logAddInTimeValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+
+                new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        Date date = DateUtils.createFromTime(i, i1, 0);
+                        diverLog.setStartTime(date);
+                        binding.logAddInTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
+                    }
+                }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true)
+                        .show();
+            }
+        });
+        binding.logAddOutTimeValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+
+                new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        Date date = DateUtils.createFromTime(i, i1, 0);
+                        diverLog.setStartTime(date);
+                        binding.logAddOutTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
+                    }
+                }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true)
+                        .show();
+            }
+        });
+        binding.logAddSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "ログの登録完了!(メッセージのみ)", Toast.LENGTH_SHORT).show();
             }
         });
-        return view;
+        binding.logAddMainLayout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+                    InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    assert inputMethodManager != null;
+                    inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                    view.requestFocus();
+                }
+            }
+        });
+        return mainView;
     }
 }

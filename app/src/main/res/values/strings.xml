@@ -2,15 +2,39 @@
     <string name="app_name">DiverLog</string>
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="add_log">ログを追加</string>
-    <string name="diving_number">ダイブNo</string>
-    <string name="date">日付</string>
-    <string name="change_date">日時変更</string>
-    <string name="place">場所</string>
-    <string name="place_example">しじみがトゥルルって頑張ってる海</string>
-    <string name="add_with_exclamation">登録！</string>
     <string name="id_with_value">ID:%1$d</string>
+
+    <string name="add_log">ログを追加</string>
+
+    <string name="diving_number">ダイブNo.</string>
+    <string name="date">日付</string>
+    <string name="weather_hint">天候</string>
+    <string name="change_date">日時変更</string>
+    <string name="place_hint">潜水地</string>
+    <string name="start_pressure_hint">開始時圧力/hPa</string>
+    <string name="end_pressure_hint">終了時圧力/hPa</string>
+    <string name="in_time_hint">IN時間</string>
+    <string name="out_time_hint">OUT時間</string>
+    <string name="entry_way_hint">エントリー方法</string>
+    <string name="transparency_hint">透明度/m</string>
+    <string name="suits_hint">ダイビングスーツ</string>
+    <string name="weight_hint">ウェイト/kg</string>
+    <string name="average_depth_hint">平均深度/m</string>
+    <string name="max_depth_hint">最大深度/m</string>
+    <string name="temperature_hint">水温/℃</string>
+    <string name="diving_time_label">ダイブタイム</string>
+    <string name="diving_time_hint">ダイブタイム</string>
+    <string name="submit">登録！</string>
+
+    <string-array name="entry_way">
+        <item>浜</item>
+        <item>ボート</item>
+    </string-array>
+
+    <string-array name="suits">
+        <item>ドライ</item>
+        <item>ウェット</item>
+    </string-array>
 
 </resources>
