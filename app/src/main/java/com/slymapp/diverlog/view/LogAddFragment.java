@@ -174,25 +174,32 @@ public class LogAddFragment extends Fragment {
     private DiverLog bindInputValues(FragmentLogAddBinding binding) {
         diverLog = new DiverLog();
 
-        diverLog.setDivingNumber(Integer.parseInt(toString(binding.logAddDivingNumberValue)));
-        diverLog.setDate(DateUtils.createFromDate(toString(binding.logAddDateValue)));
-        diverLog.setWeather(toString(binding.logAddWeatherValue));
-        diverLog.setPlace(toString(binding.logAddPlaceValue));
-        diverLog.setStartPressure(Integer.parseInt(toString(binding.logAddStartPressureValue)));
-        diverLog.setEndPressure(Integer.parseInt(toString(binding.logAddEndPressureValue)));
-        diverLog.setStartTime(DateUtils.createFromTime(toString(binding.logAddInTimeValue)));
-        diverLog.setEndTime(DateUtils.createFromTime(toString(binding.logAddOutTimeValue)));
-        diverLog.setTransparent(Integer.parseInt(toString(binding.logAddTransparencyValue)));
-        diverLog.setWeight(Integer.parseInt(toString(binding.logAddWeightValue)));
-        diverLog.setMaxDepth(Float.parseFloat(toString(binding.logAddMaxDepthValue)));
-        diverLog.setAverageDepth(Float.parseFloat(toString(binding.logAddAverageDepthValue)));
-        diverLog.setTemperature(Float.parseFloat(toString(binding.logAddTemperatureValue)));
+        diverLog.setDivingNumber(view2Integer(binding.logAddDivingNumberValue));
+        diverLog.setDate(view2Date(binding.logAddDateValue));
+        diverLog.setWeather(view2String(binding.logAddWeatherValue));
+        diverLog.setPlace(view2String(binding.logAddPlaceValue));
+        diverLog.setStartPressure(view2Integer(binding.logAddStartPressureValue));
+        diverLog.setEndPressure(view2Integer(binding.logAddEndPressureValue));
+        diverLog.setStartTime(view2Time(binding.logAddInTimeValue));
+        diverLog.setEndTime(view2Time(binding.logAddOutTimeValue));
+        diverLog.setTransparent(view2Integer(binding.logAddTransparencyValue));
+        diverLog.setWeight(view2Integer(binding.logAddWeightValue));
+        diverLog.setMaxDepth(view2Float(binding.logAddMaxDepthValue));
+        diverLog.setAverageDepth(view2Float(binding.logAddAverageDepthValue));
+        diverLog.setTemperature(view2Float(binding.logAddTemperatureValue));
         // TODO 合計ダイブタイムをsetする
 
         return diverLog;
     }
 
-    private String toString(TextView text){
-        return text.getText().toString();
-    }
+    private String view2String(TextView view){ return view.getText().toString(); }
+
+    private Integer view2Integer(TextView view) { return Integer.parseInt(view2String(view)); }
+
+    private Float view2Float(TextView view) { return Float.parseFloat(view2String(view)); }
+
+    private Date view2Date(TextView view) { return DateUtils.createFromDate(view2String(view)); }
+
+    private Date view2Time(TextView view) { return DateUtils.createFromTime(view2String(view)); }
+
 }
