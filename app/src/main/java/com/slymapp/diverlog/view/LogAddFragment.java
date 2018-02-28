@@ -1,6 +1,5 @@
 package com.slymapp.diverlog.view;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -9,15 +8,13 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -133,6 +130,7 @@ public class LogAddFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
+                new DiverLogRepositoryImpl().upsert(bindInputValues(binding));
             }
         });
         binding.logAddMainLayout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -167,5 +165,30 @@ public class LogAddFragment extends Fragment {
         binding.logAddAverageDepthValue.setText(String.valueOf(diverLog.getAverageDepth()));
         binding.logAddTemperatureValue.setText(String.valueOf(diverLog.getTemperature()));
         // TODO 合計ダイブタイムをbindingする
+    }
+
+    private DiverLog bindInputValues(FragmentLogAddBinding binding) {
+        diverLog = new DiverLog();
+
+        diverLog.setDivingNumber(Integer.parseInt(toString(binding.logAddDivingNumberValue)));
+        diverLog.setDate(DateUtils.createFromDate(toString(binding.logAddDateValue)));
+        diverLog.setTemperature(Float.parseFloat(toString(binding.logAddTemperatureValue)));
+        diverLog.setPlace(toString(binding.logAddPlaceValue));
+        diverLog.setStartPressure(Integer.parseInt(toString(binding.logAddStartPressureValue)));
+        diverLog.setEndPressure(Integer.parseInt(toString(binding.logAddEndPressureValue)));
+        diverLog.setStartTime(DateUtils.createFromTime(toString(binding.logAddInTimeValue)));
+        diverLog.setEndTime(DateUtils.createFromTime(toString(binding.logAddOutTimeValue)));
+        diverLog.setTransparent(Integer.parseInt(toString(binding.logAddTransparencyValue)));
+        diverLog.setWeight(Integer.parseInt(toString(binding.logAddWeightValue)));
+        diverLog.setMaxDepth(Float.parseFloat(toString(binding.logAddMaxDepthValue)));
+        diverLog.setAverageDepth(Float.parseFloat(toString(binding.logAddAverageDepthValue)));
+        diverLog.setTemperature(Float.parseFloat(toString(binding.logAddTemperatureValue)));
+        // TODO 合計ダイブタイムをsetする
+
+        return diverLog;
+    }
+
+    private String toString(TextView text){
+        return text.getText().toString();
     }
 }
