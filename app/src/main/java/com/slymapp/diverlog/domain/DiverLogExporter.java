@@ -9,6 +9,8 @@ public interface DiverLogExporter {
 
     /**
      * ダイバーログをファイル保存する
+     * 外部保存をするため、外部ストレージの書き込みパーミッションが必要
+     *
      * @param context {@link Context}
      * @param exportedName 出力ファイル名
      */

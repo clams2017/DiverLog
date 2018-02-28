@@ -19,12 +19,14 @@ import au.com.bytecode.opencsv.CSVWriter;
  */
 public class DiverLogCsvExporter implements DiverLogExporter {
 
+    //TODO Daggerを利用してDIに置き換える
     private DiverLogRepository repository = new DiverLogRepositoryImpl();
 
     @Override
     public void exportAllLog(Context context, String exportedName) {
         List<DiverLog> list = repository.fetchAll();
 
+        //TODO パーミッションを確認するフローを追加する
         File file = new File(Environment.getExternalStorageDirectory().getPath(), exportedName);
         Log.d("EXPORT_FILE", file.getAbsolutePath());
         try {
