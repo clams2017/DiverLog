@@ -3,16 +3,14 @@ package com.slymapp.diverlog.utils;
 
 import org.threeten.bp.DateTimeUtils;
 import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalTime;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * 日付整形用クラス
@@ -74,7 +72,9 @@ public class DateUtils {
      * @return {@link Date} 時間は00:00:00で返却される
      */
     public static Date createFromDate(String dateString) {
-        return of(dateString, DATE_PATTERN);
+        LocalDate ld = LocalDate.parse(dateString, DateTimeFormatter.ofPattern(DATE_PATTERN));
+        LocalTime lt = LocalTime.of(0, 0, 0);
+        return of(LocalDateTime.of(ld, lt));
     }
 
     /**
@@ -84,7 +84,9 @@ public class DateUtils {
      * @return {@link Date} 日付は1970/01/01で返却される
      */
     public static Date createFromTime(String timeString) {
-        return of(timeString, TIME_PATTERN);
+        LocalDate ld = LocalDate.of(1970, 1, 1);
+        LocalTime lt = LocalTime.parse(timeString, DateTimeFormatter.ofPattern(TIME_PATTERN));
+        return of(LocalDateTime.of(ld, lt));
     }
 
     // 以下は必要があればpublicに変更して使用する
@@ -119,23 +121,12 @@ public class DateUtils {
     }
 
     /**
-     * patternに従った日時文字列を{@link Date}に変換する
-     * @param dateString 日時
-     * @param pattern    dateStringの表現形式（e.g. "HH:mm"）
+     * {@link LocalDateTime} を{@link Date}に変換する
+     * @param ldt 日時
      * @return 変換後の{@Link Date}
      */
-    private static Date of(String dateString, String pattern) {
-        /* API level 19 では org.threeten.bp.InstantからDateへの変換ができない
-       　  ↓のコードではビルドエラーが出る
-        Instant instant = ZonedDateTime.parse(dateString,
-                DateTimeFormatter.ofPattern(pattern)).toInstant();
-        return Date.from(instant);
-        */
-        try {
-            return new SimpleDateFormat(pattern, Locale.getDefault()).parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+    private static Date of(LocalDateTime ldt) {
+        Instant instant = ldt.toInstant(ZoneId.systemDefault().getRules().getOffset(Instant.now()));
+        return DateTimeUtils.toDate(instant);
     }
 }
