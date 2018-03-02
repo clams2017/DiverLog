@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -174,32 +175,37 @@ public class LogAddFragment extends Fragment {
     private DiverLog bindInputValues(FragmentLogAddBinding binding) {
         diverLog = new DiverLog();
 
-        diverLog.setDivingNumber(view2Integer(binding.logAddDivingNumberValue));
-        diverLog.setDate(view2Date(binding.logAddDateValue));
-        diverLog.setWeather(view2String(binding.logAddWeatherValue));
-        diverLog.setPlace(view2String(binding.logAddPlaceValue));
-        diverLog.setStartPressure(view2Integer(binding.logAddStartPressureValue));
-        diverLog.setEndPressure(view2Integer(binding.logAddEndPressureValue));
-        diverLog.setStartTime(view2Time(binding.logAddInTimeValue));
-        diverLog.setEndTime(view2Time(binding.logAddOutTimeValue));
-        diverLog.setTransparent(view2Integer(binding.logAddTransparencyValue));
-        diverLog.setWeight(view2Integer(binding.logAddWeightValue));
-        diverLog.setMaxDepth(view2Float(binding.logAddMaxDepthValue));
-        diverLog.setAverageDepth(view2Float(binding.logAddAverageDepthValue));
-        diverLog.setTemperature(view2Float(binding.logAddTemperatureValue));
+        diverLog.setDivingNumber(getTextAsInteger(binding.logAddDivingNumberValue));
+        diverLog.setDate(getTextAsDate(binding.logAddDateValue));
+        diverLog.setWeather(getTextAsString(binding.logAddWeatherValue));
+        diverLog.setPlace(getTextAsString(binding.logAddPlaceValue));
+        diverLog.setStartPressure(getTextAsInteger(binding.logAddStartPressureValue));
+        diverLog.setEndPressure(getTextAsInteger(binding.logAddEndPressureValue));
+        diverLog.setStartTime(getTextAsTime(binding.logAddInTimeValue));
+        diverLog.setEndTime(getTextAsTime(binding.logAddOutTimeValue));
+        diverLog.setTransparent(getTextAsInteger(binding.logAddTransparencyValue));
+        diverLog.setWeight(getTextAsInteger(binding.logAddWeightValue));
+        diverLog.setMaxDepth(getTextAsFloat(binding.logAddMaxDepthValue));
+        diverLog.setAverageDepth(getTextAsFloat(binding.logAddAverageDepthValue));
+        diverLog.setTemperature(getTextAsFloat(binding.logAddTemperatureValue));
         // TODO 合計ダイブタイムをsetする
 
         return diverLog;
     }
 
-    private String view2String(TextView view){ return view.getText().toString(); }
+    @NonNull
+    private String getTextAsString(TextView view){ return view.getText().toString(); }
 
-    private Integer view2Integer(TextView view) { return Integer.parseInt(view2String(view)); }
+    @NonNull
+    private Integer getTextAsInteger(TextView view) { return Integer.parseInt(getTextAsString(view)); }
 
-    private Float view2Float(TextView view) { return Float.parseFloat(view2String(view)); }
+    @NonNull
+    private Float getTextAsFloat(TextView view) { return Float.parseFloat(getTextAsString(view)); }
 
-    private Date view2Date(TextView view) { return DateUtils.createFromDate(view2String(view)); }
+    @NonNull
+    private Date getTextAsDate(TextView view) { return DateUtils.createFromDate(getTextAsString(view)); }
 
-    private Date view2Time(TextView view) { return DateUtils.createFromTime(view2String(view)); }
+    @NonNull
+    private Date getTextAsTime(TextView view) { return DateUtils.createFromTime(getTextAsString(view)); }
 
 }
