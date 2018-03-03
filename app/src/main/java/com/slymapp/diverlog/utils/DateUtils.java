@@ -2,7 +2,10 @@ package com.slymapp.diverlog.utils;
 
 
 import org.threeten.bp.DateTimeUtils;
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalTime;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
@@ -16,6 +19,9 @@ import java.util.Date;
 
 public class DateUtils {
 
+    private static final String DATE_PATTERN = "yyyy/MM/dd";
+    private static final String TIME_PATTERN = "HH:mm";
+
     /**
      * {@link Date}を日付形式に変換する
      *
@@ -23,7 +29,7 @@ public class DateUtils {
      * @return 日付形式 (yyyy/MM/dd)
      */
     public static String toDateString(Date date) {
-        return DateUtils.format(date, "yyyy/MM/dd");
+        return DateUtils.format(date, DATE_PATTERN);
     }
 
     /**
@@ -32,7 +38,7 @@ public class DateUtils {
      * @return 時刻形式 (HH:mm)
      */
     public static String toTimeString(Date date) {
-        return DateUtils.format(date, "HH:mm");
+        return DateUtils.format(date, TIME_PATTERN);
     }
 
     /**
@@ -57,6 +63,30 @@ public class DateUtils {
      */
     public static Date createFromTime(int hour, int minute, int second) {
         return of(1970, 1, 1, hour, minute, second);
+    }
+
+    /**
+     * yyyy/MM/dd形式の時間文字列から{@link Date}を生成する
+     *
+     * @param dateString 日時
+     * @return {@link Date} 時間は00:00:00で返却される
+     */
+    public static Date createFromDate(String dateString) {
+        LocalDate ld = LocalDate.parse(dateString, DateTimeFormatter.ofPattern(DATE_PATTERN));
+        LocalTime lt = LocalTime.of(0, 0, 0);
+        return of(LocalDateTime.of(ld, lt));
+    }
+
+    /**
+     * HH:mm形式の時間文字列から{@link Date}を生成する
+     *
+     * @param timeString 時刻
+     * @return {@link Date} 日付は1970/01/01で返却される
+     */
+    public static Date createFromTime(String timeString) {
+        LocalDate ld = LocalDate.of(1970, 1, 1);
+        LocalTime lt = LocalTime.parse(timeString, DateTimeFormatter.ofPattern(TIME_PATTERN));
+        return of(LocalDateTime.of(ld, lt));
     }
 
     // 以下は必要があればpublicに変更して使用する
@@ -88,5 +118,15 @@ public class DateUtils {
         ZonedDateTime dateTime = DateTimeUtils.toInstant(date).atZone(ZoneId.systemDefault());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
         return dateTime.format(formatter);
+    }
+
+    /**
+     * {@link LocalDateTime} を{@link Date}に変換する
+     * @param ldt 日時
+     * @return 変換後の{@Link Date}
+     */
+    private static Date of(LocalDateTime ldt) {
+        Instant instant = ldt.toInstant(ZoneId.systemDefault().getRules().getOffset(Instant.now()));
+        return DateTimeUtils.toDate(instant);
     }
 }

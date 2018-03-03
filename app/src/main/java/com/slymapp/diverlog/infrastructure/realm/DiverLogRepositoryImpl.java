@@ -81,7 +81,7 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(@NonNull Realm realm) {
-                    for (int i = 0; i < 30; i++) {
+                    for (int i = 0; i < 5; i++) {
                         DiverLogEntity entity = createDiverLogEntityMock();
                         // オブジェクト差分が分かりやすいよう、divingNumberとdateを置き換え
                         entity.setDivingNumber(i + 1);

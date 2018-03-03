@@ -1,6 +1,5 @@
 package com.slymapp.diverlog.view;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -9,15 +8,14 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -62,20 +60,24 @@ public class LogAddFragment extends Fragment {
         if (savedInstanceState != null) {
             diverLog = (DiverLog) savedInstanceState.getSerializable(KEY_DIVER_LOG);
         }
+        // updateするログを受け取る
         else if (intent != null){
             diverLog = (DiverLog) intent.getSerializableExtra(KEY_DIVER_LOG);
         }
+        // insert時はデフォルト値を入力済みにする
         if (diverLog == null) {
+            // TODO Builderクラスに移行する
             diverLog = new DiverLog();
             diverLog.setDivingNumber(new DiverLogRepositoryImpl().publishDivingNumber());
             diverLog.setDate(new Date());
+            diverLog.setStartTime(new Date());
+            diverLog.setEndTime(new Date());
         }
 
         // DataBindingはViewHolderとしてのみ利用する
         final FragmentLogAddBinding binding = DataBindingUtil.bind(mainView);
-        binding.logAddDivingNumberValue.setText(String.valueOf(diverLog.getDivingNumber()));
-        binding.logAddDateValue.setText(DateUtils.toDateString(diverLog.getDate()));
-        binding.logAddPlaceValue.setText(diverLog.getPlace());
+        bindDefaultValues(diverLog, binding);
+
         binding.logAddDateValue.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.N)
             @Override
@@ -125,12 +127,17 @@ public class LogAddFragment extends Fragment {
                         .show();
             }
         });
+        // TODO DiverLogRepositoryImpl()でモックデータを上書き保存しているため、No.1-5はログデータ変更不可
         binding.logAddSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "ログの登録完了!(メッセージのみ)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
+                new DiverLogRepositoryImpl().upsert(bindInputValues(binding));
+                Context context = getContext();
+                context.startActivity(MainActivity.createIntent(context));
             }
         });
+        // EditTextからフォーカスを外したときにキーボードを隠す
         binding.logAddMainLayout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -145,4 +152,60 @@ public class LogAddFragment extends Fragment {
         });
         return mainView;
     }
+
+    private void bindDefaultValues(DiverLog diverLog, FragmentLogAddBinding binding){
+        binding.logAddDivingNumberValue.setText(String.valueOf(diverLog.getDivingNumber()));
+        binding.logAddDateValue.setText(DateUtils.toDateString(diverLog.getDate()));
+        binding.logAddWeatherValue.setText(diverLog.getWeather());
+        binding.logAddPlaceValue.setText(diverLog.getPlace());
+        binding.logAddStartPressureValue.setText(String.valueOf(diverLog.getStartPressure()));
+        binding.logAddEndPressureValue.setText(String.valueOf(diverLog.getEndPressure()));
+        binding.logAddInTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
+        binding.logAddOutTimeValue.setText(DateUtils.toTimeString(diverLog.getEndTime()));
+        binding.logAddEntryWayValue.setText(diverLog.getEntryMethod());
+        binding.logAddSuitsValue.setText(diverLog.getSuits());
+        binding.logAddTransparencyValue.setText(String.valueOf(diverLog.getTransparent()));
+        binding.logAddWeightValue.setText(String.valueOf(diverLog.getWeight()));
+        binding.logAddMaxDepthValue.setText(String.valueOf(diverLog.getMaxDepth()));
+        binding.logAddAverageDepthValue.setText(String.valueOf(diverLog.getAverageDepth()));
+        binding.logAddTemperatureValue.setText(String.valueOf(diverLog.getTemperature()));
+        // TODO 合計ダイブタイムをbindingする
+    }
+
+    private DiverLog bindInputValues(FragmentLogAddBinding binding) {
+        diverLog = new DiverLog();
+
+        diverLog.setDivingNumber(getTextAsInteger(binding.logAddDivingNumberValue));
+        diverLog.setDate(getTextAsDate(binding.logAddDateValue));
+        diverLog.setWeather(getTextAsString(binding.logAddWeatherValue));
+        diverLog.setPlace(getTextAsString(binding.logAddPlaceValue));
+        diverLog.setStartPressure(getTextAsInteger(binding.logAddStartPressureValue));
+        diverLog.setEndPressure(getTextAsInteger(binding.logAddEndPressureValue));
+        diverLog.setStartTime(getTextAsTime(binding.logAddInTimeValue));
+        diverLog.setEndTime(getTextAsTime(binding.logAddOutTimeValue));
+        diverLog.setTransparent(getTextAsInteger(binding.logAddTransparencyValue));
+        diverLog.setWeight(getTextAsInteger(binding.logAddWeightValue));
+        diverLog.setMaxDepth(getTextAsFloat(binding.logAddMaxDepthValue));
+        diverLog.setAverageDepth(getTextAsFloat(binding.logAddAverageDepthValue));
+        diverLog.setTemperature(getTextAsFloat(binding.logAddTemperatureValue));
+        // TODO 合計ダイブタイムをsetする
+
+        return diverLog;
+    }
+
+    @NonNull
+    private String getTextAsString(TextView view){ return view.getText().toString(); }
+
+    @NonNull
+    private Integer getTextAsInteger(TextView view) { return Integer.parseInt(getTextAsString(view)); }
+
+    @NonNull
+    private Float getTextAsFloat(TextView view) { return Float.parseFloat(getTextAsString(view)); }
+
+    @NonNull
+    private Date getTextAsDate(TextView view) { return DateUtils.createFromDate(getTextAsString(view)); }
+
+    @NonNull
+    private Date getTextAsTime(TextView view) { return DateUtils.createFromTime(getTextAsString(view)); }
+
 }

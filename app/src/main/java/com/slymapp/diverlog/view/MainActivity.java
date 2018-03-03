@@ -1,5 +1,7 @@
 package com.slymapp.diverlog.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +13,16 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.slymapp.diverlog.R;
 
 public class MainActivity extends AppCompatActivity {
+
+    /**
+     * {@link MainActivity}の{@link Intent}を生成する
+     *
+     * @param context 遷移元
+     * @return {@link Intent}
+     */
+    public static Intent createIntent(Context context) {
+        return new Intent(context, MainActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
