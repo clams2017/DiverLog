@@ -34,11 +34,20 @@ public class DateUtils {
 
     /**
      * {@link Date} を時刻形式に変換する
-     * @param date {@link}
+     * @param date {@link Date}
      * @return 時刻形式 (HH:mm)
      */
     public static String toTimeString(Date date) {
         return DateUtils.format(date, TIME_PATTERN);
+    }
+
+    /**
+     * {@link Date} を日時形式に変換する
+     * @param date {@link Date}
+     * @return 日時形式 (yyyy-MM-dd HH:mm:ss)
+     */
+    public static String toDateTimeString(Date date){
+        return DateUtils.format(date, "yyyy-MM-dd HH:mm:ss");
     }
 
     /**
