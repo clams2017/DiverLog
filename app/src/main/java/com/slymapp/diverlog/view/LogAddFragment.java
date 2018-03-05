@@ -162,14 +162,19 @@ public class LogAddFragment extends Fragment {
         binding.logAddEndPressureValue.setText(String.valueOf(diverLog.getEndPressure()));
         binding.logAddInTimeValue.setText(DateUtils.toTimeString(diverLog.getStartTime()));
         binding.logAddOutTimeValue.setText(DateUtils.toTimeString(diverLog.getEndTime()));
-        binding.logAddEntryWayValue.setText(diverLog.getEntryMethod());
-        binding.logAddSuitsValue.setText(diverLog.getSuits());
         binding.logAddTransparencyValue.setText(String.valueOf(diverLog.getTransparent()));
         binding.logAddWeightValue.setText(String.valueOf(diverLog.getWeight()));
         binding.logAddMaxDepthValue.setText(String.valueOf(diverLog.getMaxDepth()));
         binding.logAddAverageDepthValue.setText(String.valueOf(diverLog.getAverageDepth()));
         binding.logAddTemperatureValue.setText(String.valueOf(diverLog.getTemperature()));
-        // TODO 合計ダイブタイムをbindingする
+        // Null値をsetTextしてドロップダウンが非表示になることを防ぐ
+        if(diverLog.getEntryMethod() != null) {
+            binding.logAddEntryWayValue.setText(diverLog.getEntryMethod());
+        }
+        if(diverLog.getSuits() != null) {
+            binding.logAddSuitsValue.setText(diverLog.getSuits());
+        }
+        // TODO 合計ダイブタイムをsetTextする
     }
 
     private DiverLog bindInputValues(FragmentLogAddBinding binding) {
