@@ -30,13 +30,15 @@ import static android.support.v4.content.ContextCompat.startActivity;
  */
 public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<DiverLog> list = new ArrayList<>();
+    private List<DiverLog> list;
     private Context context;
 
-    LogListAdapter(Context context) {
-        list = new DiverLogRepositoryImpl().fetchAll(); // TODO 非同期で取得するよう変更する
+    LogListAdapter(Context context, List<DiverLog> list) {
+        this.list = list;
         this.context = context;
     }
+
+    public void setList(List<DiverLog> list) { this.list = list; }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
