@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapDropDown;
 import com.slymapp.diverlog.R;
 import com.slymapp.diverlog.databinding.FragmentLogAddBinding;
 import com.slymapp.diverlog.domain.DiverLog;
@@ -125,6 +126,22 @@ public class LogAddFragment extends Fragment {
                     }
                 }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true)
                         .show();
+            }
+        });
+        binding.logAddEntryWayValue.setOnDropDownItemClickListener(new BootstrapDropDown.OnDropDownItemClickListener() {
+            @Override
+            public void onItemClick(ViewGroup parent, View v, int id) {
+                TextView t = (TextView) v;
+                String text = t.getText().toString();
+                binding.logAddEntryWayValue.setText(text);
+            }
+        });
+        binding.logAddSuitsValue.setOnDropDownItemClickListener(new BootstrapDropDown.OnDropDownItemClickListener() {
+            @Override
+            public void onItemClick(ViewGroup parent, View v, int id) {
+                TextView t = (TextView) v;
+                String text = t.getText().toString();
+                binding.logAddSuitsValue.setText(text);
             }
         });
         // TODO DiverLogRepositoryImpl()でモックデータを上書き保存しているため、No.1-5はログデータ変更不可
