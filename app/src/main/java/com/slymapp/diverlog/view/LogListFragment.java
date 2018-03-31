@@ -11,12 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.slymapp.diverlog.R;
-import com.slymapp.diverlog.domain.DiverLog;
-import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * ダイバーログの一覧表示Fragment
@@ -24,7 +18,6 @@ import java.util.List;
 public class LogListFragment extends Fragment {
 
     private LogListAdapter adapter;
-    private List<DiverLog> list = new ArrayList<>();
 
     public static LogListFragment newInstance() {
         Bundle args = new Bundle();
@@ -42,8 +35,7 @@ public class LogListFragment extends Fragment {
         // リスト部分のビュー生成
         RecyclerView listView = view.findViewById(R.id.log_list_view);
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
-        list = new DiverLogRepositoryImpl().fetchAll();
-        adapter = new LogListAdapter(getContext(), list);
+        adapter = new LogListAdapter(getContext());
         listView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(listView.getContext(),
                 new LinearLayoutManager(getActivity()).getOrientation());
@@ -55,8 +47,7 @@ public class LogListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        list = new DiverLogRepositoryImpl().fetchAll();
-        adapter.setList(list);
+        adapter.updateLogs();
         adapter.notifyDataSetChanged();
     }
 }

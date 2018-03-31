@@ -33,16 +33,19 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<DiverLog> list;
     private Context context;
 
-    LogListAdapter(Context context, List<DiverLog> list) {
-        this.list = list;
+    LogListAdapter(Context context) {
+        updateLogs();
         this.context = context;
     }
 
-    public void setList(List<DiverLog> list) { this.list = list; }
+    /** package-private **/ void updateLogs() {
+        this.list = new DiverLogRepositoryImpl().fetchAll();
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_log_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_log_list_item,
+                parent, false);
         return new ItemViewHolder(view);
     }
 

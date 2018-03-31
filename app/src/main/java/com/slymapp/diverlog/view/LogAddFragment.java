@@ -1,6 +1,7 @@
 package com.slymapp.diverlog.view;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -131,9 +132,13 @@ public class LogAddFragment extends Fragment {
         binding.logAddSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
-                new DiverLogRepositoryImpl().upsert(bindInputValues(binding));
-                getActivity().finish();
+                try {
+                    Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
+                    new DiverLogRepositoryImpl().upsert(bindInputValues(binding));
+                    getActivity().finish();
+                }catch (NullPointerException e){
+                    Toast.makeText(getContext(), "ログ登録に失敗しました。", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         // EditTextからフォーカスを外したときにキーボードを隠す
