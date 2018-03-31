@@ -8,9 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.slymapp.diverlog.R;
+import com.slymapp.diverlog.domain.DiverLogCsvExporter;
+import com.slymapp.diverlog.domain.DiverLogExporter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,6 +58,29 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+        switch (id) {
+            case R.id.action_import:
+                importLogs();
+                return true;
+            case R.id.action_export:
+                exportLogs();
+                return true;
+            case R.id.action_settings:
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void importLogs() {
+        Toast.makeText(MainActivity.this, "ログを読み込みました。（メッセージのみ）", Toast.LENGTH_SHORT).show();
+    }
+
+    private void exportLogs() {
+        // TODO: ファイルが存在する場合、メッセージは出るが何もしない。API側の例外処理実装後に対応予定
+        Context context = MainActivity.this;
+        DiverLogExporter exporter = new DiverLogCsvExporter();
+        exporter.exportAllLog(context, "DiverLogList.csv");
+        Toast.makeText(context, "ログを保存しました。", Toast.LENGTH_SHORT).show();
     }
 }
