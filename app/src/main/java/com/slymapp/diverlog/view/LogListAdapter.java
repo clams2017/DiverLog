@@ -38,7 +38,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.context = context;
     }
 
-    /** package-private **/ void updateLogs() {
+    void updateLogs() {
         this.list = new DiverLogRepositoryImpl().fetchAll();
     }
 

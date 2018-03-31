@@ -131,14 +131,11 @@ public class LogAddFragment extends Fragment {
         // TODO DiverLogRepositoryImpl()でモックデータを上書き保存しているため、No.1-5はログデータ変更不可
         binding.logAddSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                try {
-                    Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
-                    new DiverLogRepositoryImpl().upsert(bindInputValues(binding));
+    public void onClick(View view) {
+                Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
+                new DiverLogRepositoryImpl().upsert(bindInputValues(binding));
+                if(getActivity() != null)
                     getActivity().finish();
-                }catch (NullPointerException e){
-                    Toast.makeText(getContext(), "ログ登録に失敗しました。", Toast.LENGTH_SHORT).show();
-                }
             }
         });
         // EditTextからフォーカスを外したときにキーボードを隠す
