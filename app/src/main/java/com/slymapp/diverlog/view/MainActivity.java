@@ -42,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(LogAddActivity.createIntent(MainActivity.this));
             }
         });
+        fab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, new DummyFragment())
+                        .commit();
+                return true;
+            }
+        });
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment, LogListFragment.newInstance())

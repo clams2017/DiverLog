@@ -3,10 +3,7 @@ package com.slymapp.diverlog.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +19,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * ログリストのアダプタークラス
@@ -84,7 +79,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             place.setText(diverLog.getPlace());
             date.setText(DateUtils.toDateString(diverLog.getDate()));
             // とりあえず適当な画像を表示する
-            Picasso.with(context).load("file://"+Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DCIM+"/m_9.jpg").fit().into(image);
+            Picasso.with(context).load("file://" + Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/m_9.jpg").fit().into(image);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

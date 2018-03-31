@@ -23,7 +23,7 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
 
     public DiverLogRepositoryImpl() {
         //TODO fetch確認用にデータを入れておく。書き込み処理の実装後に削除する
-        initWithMock();
+//        initWithMock();
     }
 
     @Override
@@ -63,6 +63,19 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
                 public void execute(@NonNull Realm realm) {
                     DiverLogEntity entity = DiverLogConverter.createEntity(log);
                     realm.copyToRealmOrUpdate(entity);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void deleteAll() {
+        try (Realm realm = Realm.getDefaultInstance()) {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(@NonNull Realm realm) {
+                    RealmResults<DiverLogEntity> results = realm.where(DiverLogEntity.class).findAll();
+                    results.deleteAllFromRealm();
                 }
             });
         }

@@ -38,6 +38,11 @@ public class DiverLogRepositoryMock implements DiverLogRepository {
     }
 
     @Override
+    public void deleteAll() {
+        diverLogSparseArray = createWithMock();
+    }
+
+    @Override
     public int publishDivingNumber() {
         //TODO ログ削除があった場合の動作を確認する
         return diverLogSparseArray.size() + 1;
