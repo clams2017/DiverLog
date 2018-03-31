@@ -134,8 +134,9 @@ public class LogAddFragment extends Fragment {
     public void onClick(View view) {
                 Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
                 new DiverLogRepositoryImpl().upsert(bindInputValues(binding));
-                if(getActivity() != null)
+                if(getActivity() != null) {
                     getActivity().finish();
+                }
             }
         });
         // EditTextからフォーカスを外したときにキーボードを隠す
