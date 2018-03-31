@@ -2,9 +2,10 @@ package com.slymapp.diverlog.domain;
 
 import android.content.Context;
 
+import java.io.IOException;
+
 /**
  * ダイバーログの外部保存・読み込みをするインターフェース
- * TODO インタフェースを変更して出力可否を返却できるようにする
  */
 public interface DiverLogBackupManager {
 
@@ -13,16 +14,16 @@ public interface DiverLogBackupManager {
      * 外部保存をするため、外部ストレージの書き込みパーミッションが必要
      *
      * @param context {@link Context}
-     * @param exportedName 出力ファイル名
+     * @throws IOException 書き込みに失敗した場合
      */
-    void exportAllLog(Context context, String exportedName);
+    void exportAllLog(Context context) throws IOException;
 
     /**
      * ダイバーログをファイルから読み込む
      * 外部ストレージの読み込みパーミッションが必要
      *
-     * @param context      {@link Context}
-     * @param exportedName 出力ファイル名
+     * @param context {@link Context}
+     * @throws IOException       書き込みに失敗した場合
      */
-    void importLogs(Context context, String exportedName);
+    void importLogs(Context context) throws IOException;
 }

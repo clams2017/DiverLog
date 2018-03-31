@@ -24,29 +24,25 @@ public class DiverLogCsvBackupManager implements DiverLogBackupManager {
     private DiverLogRepository repository = new DiverLogRepositoryImpl();
 
     @Override
-    public void exportAllLog(Context context, String exportedName) {
+    public void exportAllLog(Context context) throws IOException {
         List<DiverLog> list = repository.fetchAll();
 
         //TODO パーミッションを確認するフローを追加する
-        File file = new File(Environment.getExternalStorageDirectory().getPath(), exportedName);
+        File file = new File(Environment.getExternalStorageDirectory().getPath(), "DiverLogList.csv");
         Log.d("EXPORT_FILE", file.getAbsolutePath());
-        try {
-            if (!file.createNewFile()) {
-                return;
-            }
-            CSVWriter writer = new CSVWriter(new PrintWriter(file));
-            for (DiverLog log : list) {
-                writer.writeNext(DiverLogHelper.toStringArray(log));
-            }
-            writer.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!file.createNewFile()) {
+            throw new IOException("File is not created");
         }
+        CSVWriter writer = new CSVWriter(new PrintWriter(file));
+        for (DiverLog log : list) {
+            writer.writeNext(DiverLogHelper.toStringArray(log));
+        }
+        writer.flush();
     }
 
     @Deprecated
     @Override
-    public void importLogs(Context context, String exportedName) {
-        throw new RuntimeException();
+    public void importLogs(Context context) throws IOException {
+        throw new IOException("not implemented");
     }
 }

@@ -23,7 +23,7 @@ public class DiverLogRepositoryImpl implements DiverLogRepository {
 
     public DiverLogRepositoryImpl() {
         //TODO fetch確認用にデータを入れておく。書き込み処理の実装後に削除する
-        initWithMock();
+//        initWithMock();
     }
 
     @Override
