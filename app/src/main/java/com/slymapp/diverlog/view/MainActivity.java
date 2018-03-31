@@ -43,18 +43,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        BootstrapButton exBtn = findViewById(R.id.main_export_btn);
-        exBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO: ファイルが存在する場合、メッセージは出るが何もしない。API側の例外処理実装後に対応予定
-                Context context = MainActivity.this;
-                DiverLogExporter exporter = new DiverLogCsvExporter();
-                exporter.exportAllLog(context, "DiverLogList.csv");
-                Toast.makeText(context, "ログを保存しました。", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment, LogListFragment.newInstance())
                 .commit();
@@ -70,6 +58,29 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+        switch (id) {
+            case R.id.action_import:
+                importLogs();
+                return true;
+            case R.id.action_export:
+                exportLogs();
+                return true;
+            case R.id.action_settings:
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void importLogs() {
+        Toast.makeText(MainActivity.this, "ログを読み込みました。（メッセージのみ）", Toast.LENGTH_SHORT).show();
+    }
+
+    private void exportLogs() {
+        // TODO: ファイルが存在する場合、メッセージは出るが何もしない。API側の例外処理実装後に対応予定
+        Context context = MainActivity.this;
+        DiverLogExporter exporter = new DiverLogCsvExporter();
+        exporter.exportAllLog(context, "DiverLogList.csv");
+        Toast.makeText(context, "ログを保存しました。", Toast.LENGTH_SHORT).show();
     }
 }
