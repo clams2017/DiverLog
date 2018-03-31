@@ -4,6 +4,7 @@ import android.content.Context;
 
 /**
  * ダイバーログの外部保存・読み込みをするインターフェース
+ * TODO インタフェースを変更して出力可否を返却できるようにする
  */
 public interface DiverLogBackupManager {
 
