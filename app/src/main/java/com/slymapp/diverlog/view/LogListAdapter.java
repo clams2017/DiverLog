@@ -17,7 +17,6 @@ import com.slymapp.diverlog.infrastructure.realm.DiverLogRepositoryImpl;
 import com.slymapp.diverlog.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +24,7 @@ import java.util.List;
  */
 public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<DiverLog> list;
+    private List<DiverLog> items;
     private Context context;
 
     LogListAdapter(Context context) {
@@ -34,7 +33,7 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     void updateLogs() {
-        this.list = new DiverLogRepositoryImpl().fetchAll();
+        this.items = new DiverLogRepositoryImpl().fetchAll();
     }
 
     @Override
@@ -47,12 +46,12 @@ public class LogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-        itemViewHolder.bind(list.get(position));
+        itemViewHolder.bind(items.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return items.size();
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
