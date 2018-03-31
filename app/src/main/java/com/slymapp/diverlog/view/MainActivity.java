@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.slymapp.diverlog.R;
-import com.slymapp.diverlog.domain.DiverLogCsvExporter;
-import com.slymapp.diverlog.domain.DiverLogExporter;
+import com.slymapp.diverlog.domain.DiverLogBackupManager;
+import com.slymapp.diverlog.domain.DiverLogJsonBackupManager;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -88,8 +90,12 @@ public class MainActivity extends AppCompatActivity {
     private void exportLogs() {
         // TODO: ファイルが存在する場合、メッセージは出るが何もしない。API側の例外処理実装後に対応予定
         Context context = MainActivity.this;
-        DiverLogExporter exporter = new DiverLogCsvExporter();
-        exporter.exportAllLog(context, "DiverLogList.csv");
+        DiverLogBackupManager exporter = new DiverLogJsonBackupManager();
+        try {
+            exporter.exportAllLog(context);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Toast.makeText(context, "ログを保存しました。", Toast.LENGTH_SHORT).show();
     }
 }
