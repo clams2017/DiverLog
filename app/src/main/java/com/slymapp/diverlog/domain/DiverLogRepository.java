@@ -32,6 +32,11 @@ public interface DiverLogRepository {
     void upsert(DiverLog log);
 
     /**
+     * ダイバーログを全て削除します。
+     */
+    void deleteAll();
+
+    /**
      * 一意となるダイビングナンバーを発行します。
      *
      * @return ダイビングナンバー

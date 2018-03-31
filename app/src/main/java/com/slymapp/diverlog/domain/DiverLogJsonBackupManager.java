@@ -60,6 +60,8 @@ public class DiverLogJsonBackupManager implements DiverLogBackupManager {
                 .toList()
                 .blockingGet();
 
+        // インポート対象データのみでデータを構築し直す
+        repository.deleteAll();
         for (DiverLog input : list) {
             repository.upsert(input);
         }
