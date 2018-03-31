@@ -16,8 +16,9 @@ import au.com.bytecode.opencsv.CSVWriter;
 
 /**
  * {@link DiverLog}をCSV形式でエクスポートするクラス
+ * TODO Migrationのためのバージョン管理追加
  */
-public class DiverLogCsvExporter implements DiverLogExporter {
+public class DiverLogCsvBackupManager implements DiverLogBackupManager {
 
     //TODO Daggerを利用してDIに置き換える
     private DiverLogRepository repository = new DiverLogRepositoryImpl();
@@ -41,5 +42,11 @@ public class DiverLogCsvExporter implements DiverLogExporter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Deprecated
+    @Override
+    public void importLogs(Context context, String exportedName) {
+        throw new RuntimeException();
     }
 }

@@ -10,8 +10,8 @@ import android.widget.Toast;
 
 import com.slymapp.diverlog.R;
 import com.slymapp.diverlog.databinding.FragmentDummyBinding;
-import com.slymapp.diverlog.domain.DiverLogCsvExporter;
-import com.slymapp.diverlog.domain.DiverLogExporter;
+import com.slymapp.diverlog.domain.DiverLogBackupManager;
+import com.slymapp.diverlog.domain.DiverLogCsvBackupManager;
 
 /**
  * Hello Worldを表示する、画面遷移の実装のダミー画面
@@ -26,7 +26,7 @@ public class DummyFragment extends Fragment {
         binding.sampleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DiverLogExporter exporter = new DiverLogCsvExporter();
+                DiverLogBackupManager exporter = new DiverLogCsvBackupManager();
                 exporter.exportAllLog(getContext(), "DiverLogList.csv");
                 Toast.makeText(view.getContext(), "exported!!", Toast.LENGTH_SHORT).show();
             }
