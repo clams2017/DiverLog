@@ -1,6 +1,7 @@
 package com.slymapp.diverlog.view;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -147,11 +148,12 @@ public class LogAddFragment extends Fragment {
         // TODO DiverLogRepositoryImpl()でモックデータを上書き保存しているため、No.1-5はログデータ変更不可
         binding.logAddSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+    public void onClick(View view) {
                 Toast.makeText(getContext(), "ログの登録完了!", Toast.LENGTH_SHORT).show();
                 new DiverLogRepositoryImpl().upsert(bindInputValues(binding));
-                Context context = getContext();
-                context.startActivity(MainActivity.createIntent(context));
+                if(getActivity() != null) {
+                    getActivity().finish();
+                }
             }
         });
         // EditTextからフォーカスを外したときにキーボードを隠す

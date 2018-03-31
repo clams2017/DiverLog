@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.slymapp.diverlog.R;
 
-
 /**
  * ダイバーログの一覧表示Fragment
  */
@@ -48,6 +47,7 @@ public class LogListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        adapter.updateLogs();
         adapter.notifyDataSetChanged();
     }
 }
