@@ -274,7 +274,7 @@
                         android:id="@+id/log_add_average_depth_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/max_depth_hint"
+                        android:hint="@string/average_depth_hint"
                         android:inputType="number" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -292,7 +292,7 @@
                         android:id="@+id/log_add_max_depth_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/average_depth_hint"
+                        android:hint="@string/max_depth_hint"
                         android:inputType="number" />
 
                 </android.support.design.widget.TextInputLayout>
