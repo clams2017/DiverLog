@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.slymapp.diverlog.R;
+import com.slymapp.diverlog.domain.DiverLogCsvExporter;
+import com.slymapp.diverlog.domain.DiverLogExporter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +47,11 @@ public class MainActivity extends AppCompatActivity {
         exBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "ログを保存しました。（メッセージのみ）", Toast.LENGTH_SHORT).show();
+                // TODO: ファイルが存在する場合、メッセージは出るが何もしない。API側の例外処理実装後に対応予定
+                Context context = MainActivity.this;
+                DiverLogExporter exporter = new DiverLogCsvExporter();
+                exporter.exportAllLog(context, "DiverLogList.csv");
+                Toast.makeText(context, "ログを保存しました。", Toast.LENGTH_SHORT).show();
             }
         });
 
