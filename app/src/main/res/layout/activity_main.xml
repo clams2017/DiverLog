@@ -35,4 +35,17 @@
         app:roundedCorners="true"
         app:fontAwesomeIcon="fa_plus"/>
 
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/main_export_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="xl"
+        app:buttonMode="regular"
+        app:showOutline="false"
+        app:roundedCorners="true"
+        app:fontAwesomeIcon="fa_save"/>
+
 </android.support.design.widget.CoordinatorLayout>

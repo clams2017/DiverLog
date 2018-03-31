@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.slymapp.diverlog.R;
@@ -37,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(LogAddActivity.createIntent(MainActivity.this));
+            }
+        });
+
+        BootstrapButton exBtn = findViewById(R.id.main_export_btn);
+        exBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "ログを保存しました。（メッセージのみ）", Toast.LENGTH_SHORT).show();
             }
         });
 
